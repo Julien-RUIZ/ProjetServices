@@ -22,6 +22,9 @@ class UserAddress
     #[ORM\Column(length: 255, nullable: true)]
     private ?int $postalCode = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $mainAddress = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class UserAddress
     public function setPostalCode(?int $postalCode): static
     {
         $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function isMainAddress(): ?bool
+    {
+        return $this->mainAddress;
+    }
+
+    public function setMainAddress(?bool $mainAddress): static
+    {
+        $this->mainAddress = $mainAddress;
 
         return $this;
     }
