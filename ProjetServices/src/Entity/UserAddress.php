@@ -29,12 +29,12 @@ class UserAddress
 
     public function getAddress(): ?string
     {
-        return $this->Adress;
+        return $this->Address;
     }
 
-    public function setAddress(?string $Adress): static
+    public function setAddress(?string $Address): static
     {
-        $this->Adress = $Adress;
+        $this->Address = $Address;
 
         return $this;
     }
