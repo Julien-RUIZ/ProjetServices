@@ -45,4 +45,15 @@ class UserAdressRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+            public function findByUserId($userid): array
+            {
+                return $this->createQueryBuilder('u')
+                    ->select('u')
+                    ->setParameter('userid', $userid)
+                    ->where('u.user = :userid')
+                    ->getQuery()
+                    ->getResult();
+            }
+
 }

@@ -22,8 +22,12 @@ class UserAddress
     #[ORM\Column(length: 255, nullable: true)]
     private ?int $postalCode = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $mainAddress = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $mainAddress = false;
+
+    #[ORM\ManyToOne(inversedBy: 'userAddresses')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -71,9 +75,21 @@ class UserAddress
         return $this->mainAddress;
     }
 
-    public function setMainAddress(?bool $mainAddress): static
+    public function setMainAddress(?bool $mainAddress = true): static
     {
         $this->mainAddress = $mainAddress;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
