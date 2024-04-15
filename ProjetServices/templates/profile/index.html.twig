@@ -13,7 +13,7 @@
             <p><strong>Date de naissance :</strong> {{ user.dateOfBirth |date("m/d/Y")}}</p>
             <p><strong>Email :</strong> {{ user.email }}</p>
             <div class="button">
-                <button type="button" class="btn btn-secondary">Modifier</button>
+                <a href="{{ path('app_user_update', {id:user.id}) }}" class="btn btn-secondary">Modifier</a>
             </div>
         </div>
 
@@ -33,8 +33,8 @@
                         </li>
                     </ul>
                     <div class="button mb-2">
-                        <button type="button" class="btn btn-secondary mx-2">Supprimer</button>
-                        <button type="button" class="btn btn-secondary mx-2">Modifier</button>
+                        <a href="{{ path('app_useraddress_delete', {id:addressUser.id }) }}" class="btn btn-secondary mx-2">Supprimer</a>
+                        <a href="{{ path('app_useraddress_update', {id:addressUser.id }) }}" class="btn btn-secondary mx-2">Modifier</a>
                     </div>
                 </div>
             {% endfor %}

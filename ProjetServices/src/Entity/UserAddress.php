@@ -19,7 +19,7 @@ class UserAddress
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?int $postalCode = null;
 
     #[ORM\Column(type: 'boolean')]
