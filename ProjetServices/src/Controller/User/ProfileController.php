@@ -2,7 +2,7 @@
 
 namespace App\Controller\User;
 
-use App\Repository\UserAdressRepository;
+use App\Repository\UserAddressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function index(UserAdressRepository $userAdressRepository): Response
+    public function index(UserAddressRepository $userAddressRepository): Response
     {
+
        $user = $this->getUser();
        $user_id = $user->getId();
-       $address = $userAdressRepository->findByUserId($user_id);
+       $address = $userAddressRepository->findByUserId($user_id);
 
-       //dd($address);
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController', 'address'=>$address, 'user'=>$user
         ]);

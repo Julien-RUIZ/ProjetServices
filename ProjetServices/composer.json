@@ -46,7 +46,8 @@
         "symfonycasts/verify-email-bundle": "^1.17",
         "twbs/bootstrap": "5.3.3",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+      "ext-ibm_db2": "*"
     },
     "config": {
         "allow-plugins": {

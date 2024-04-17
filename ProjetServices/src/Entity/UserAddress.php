@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\UserAdressRepository;
+use App\Repository\UserAddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: UserAdressRepository::class)]
+#[ORM\Entity(repositoryClass: UserAddressRepository::class)]
+
 class UserAddress
 {
     #[ORM\Id]
@@ -13,13 +15,13 @@ class UserAddress
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $Address = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 7, nullable: true)]
     private ?int $postalCode = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -28,6 +30,15 @@ class UserAddress
     #[ORM\ManyToOne(inversedBy: 'userAddresses')]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $dwellingType = null;
+
+    #[ORM\Column]
+    private ?int $dwellingSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $rental = null;
 
     public function getId(): ?int
     {
@@ -90,6 +101,42 @@ class UserAddress
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDwellingType(): ?string
+    {
+        return $this->dwellingType;
+    }
+
+    public function setDwellingType(string $dwellingType): static
+    {
+        $this->dwellingType = $dwellingType;
+
+        return $this;
+    }
+
+    public function getDwellingSize(): ?int
+    {
+        return $this->dwellingSize;
+    }
+
+    public function setDwellingSize(int $dwellingSize): static
+    {
+        $this->dwellingSize = $dwellingSize;
+
+        return $this;
+    }
+
+    public function isRental(): ?bool
+    {
+        return $this->rental;
+    }
+
+    public function setRental(?bool $rental): static
+    {
+        $this->rental = $rental;
 
         return $this;
     }

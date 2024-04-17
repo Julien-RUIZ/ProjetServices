@@ -143,6 +143,7 @@
       <path value="$PROJECT_DIR$/ProjetServices/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/symfonycasts/verify-email-bundle" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/symfony/ux-toggle-password" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

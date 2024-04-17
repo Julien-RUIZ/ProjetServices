@@ -26,7 +26,6 @@ class UserAddressAddController extends AbstractController
             $this->addFlash('success', 'Ajout d\'adresse validé' );
             return $this->redirectToRoute('app_profile');
         }
-
         return $this->render('user_address_add/index.html.twig', [
             'controller_name' => 'UserAddressAddController', 'form'=>$form
         ]);
