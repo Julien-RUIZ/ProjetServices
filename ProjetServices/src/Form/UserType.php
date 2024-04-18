@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +33,9 @@ class UserType extends AbstractType
             ->add('dateOfBirth', DateType::class, [
                 'widget' => 'single_text',
                 'required'=>true
+            ])
+            ->add('telephone', IntegerType::class,[
+                'label'=>'Numéro de téléphone'
             ])
             ->add('save',SubmitType::class, [
                 'label'=>'Enregistrer'

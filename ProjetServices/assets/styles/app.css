@@ -1,7 +1,7 @@
 .blocInfoPerso, .blocListeHabitation{
     border: 1px solid black;
     margin: 20px 0 20px 0 ;
-    padding: 10px 10px 10px 50px;
+    padding: 10px 50px 10px 50px;
     border-radius: 10px;
     box-shadow: 10px 5px 5px darkgray;
     background-color: honeydew;
@@ -13,4 +13,13 @@
 .button{
     display: flex;
     justify-content: center;
+}
+
+@media screen and (min-width: 768px ) {
+    .blocProfile{
+        display: flex;
+    }
+    .blocInfoPerso{
+        height: 500px;
+    }
 }

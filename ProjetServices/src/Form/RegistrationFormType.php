@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -47,6 +48,11 @@ class RegistrationFormType extends AbstractType
                 ],
                 'help'=>'Doit contenir au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre.
                                       Peut contenir des caractères spéciaux. Minimum 8 caractères'
+            ])
+            ->add('dateOfBirth', DateType::class, [
+                'widget' => 'single_text',
+                'required'=>true,
+                'label'=>'Date de naissance'
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

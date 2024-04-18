@@ -63,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: UserAddress::class, mappedBy: 'user')]
     private Collection $userAddresses;
 
+    #[ORM\Column(length: 10,nullable: true)]
+    private ?int $telephone = null;
+
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
@@ -229,6 +232,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $userAddress->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?int
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?int $telephone): static
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
