@@ -14,11 +14,9 @@ class UserAddressDeleteController extends AbstractController
     #[Route('/useraddress/delete/{id}', name: 'app_useraddress_delete')]
     public function index(EntityManagerInterface $em, Request $request, UserAddress $userAddress): Response
     {
-
         $em->remove($userAddress);
         $em->flush();
         $this->addFlash('success', 'Suppression d\'adresse validé');
         return $this->redirectToRoute('app_profile');
-
     }
 }

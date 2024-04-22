@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\UserAddress;
 
 use App\Entity\UserAddress;
 use App\Form\UserAddressType;

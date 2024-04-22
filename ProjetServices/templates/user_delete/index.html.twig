@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Information de suppression{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="mt-5 text-center">Informations sur la suppression d'un compte</h1>
+
+        <p class="mt-5">Merci de valider votre demande de suppression de compte. Toutes les informations personnelles ainsi que toutes
+            les données d'habitations et les services seront supprimées.</p>
+
+        <div class="OuiNonDelete mt-5">
+            <div><a href="{{ path('app_user_delete', {id:user.id}) }}" class="btn btn-secondary">Oui</a></div>
+            <div><a href="{{ path('app_profile') }}" class="btn btn-secondary">Non</a></div>
+        </div>
+    </div>
+{% endblock %}
