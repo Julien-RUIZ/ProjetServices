@@ -31,7 +31,6 @@ class UserAddressRepository extends ServiceEntityRepository
              ->getResult();
     }
 
-
     /**
      * @return array
      */

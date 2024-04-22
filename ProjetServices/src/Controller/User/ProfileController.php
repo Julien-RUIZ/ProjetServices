@@ -15,7 +15,6 @@ class ProfileController extends AbstractController
     #[Route('/profile', name: 'app_profile')]
     public function index(UserAddressRepository $userAddressRepository): Response
     {
-
        $user = $this->getUser();
        $user_id = $user->getId();
        $address = $userAddressRepository->findByUserId($user_id);
