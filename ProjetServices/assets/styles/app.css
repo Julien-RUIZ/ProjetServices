@@ -19,6 +19,13 @@
     justify-content: space-evenly;
 }
 
+.paginationAddress{
+    text-align: center;
+}
+
+
+
+
 @media screen and (min-width: 768px ) {
     .blocProfile{
         display: flex;
