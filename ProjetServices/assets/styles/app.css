@@ -23,8 +23,21 @@
     text-align: center;
 }
 
+.tableAddress, .tableServices {
+    border: 1px solid black;
+    padding: 5px;
+}
+.tableAddress{
+    background-color: beige;
+}
+.tableServices{
+    background-color: cornsilk ;
+}
 
-
+.blocServices{
+    display: flex;
+    justify-content: center;
+}
 
 @media screen and (min-width: 768px ) {
     .blocProfile{

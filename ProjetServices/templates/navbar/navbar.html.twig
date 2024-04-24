@@ -2,28 +2,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{path('app_home') }}">Projet-services</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{path('app_home') }}">Home</a>
+                    <a class="nav-link {% if app.request.pathInfo == '/'  %} active {% endif %}" aria-current="page" href="{{path('app_home') }}">Home</a>
                 </li>
 
                 {% if app.user != null and app.user.isVerified == true %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    <a class="nav-link {% if app.request.pathInfo == '/services'  %} active {% endif %}" href="{{ path('app_service_management') }}">Services</a>
                 </li>
                 {% endif %}
             </ul>
@@ -32,22 +22,24 @@
             {% if app.user == null %}
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                        <a class="nav-link active" href="{{ path('app_login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                        <a class="nav-link active" href="{{ path('app_register') }}">Register</a>
                     </li>
                 </ul>
              {% else %}
                  <ul class="navbar-nav">
                      <li class="nav-item">
-                         <a class="nav-link" href="{{ path('app_profile') }}">Profil</a>
+                         <a class="nav-link active" href="{{ path('app_profile') }}">Profil</a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                         <a class="nav-link active" href="{{ path('app_logout') }}">Logout</a>
                      </li>
                  </ul>
             {% endif %}
         </div>
     </div>
 </nav>
+
+
