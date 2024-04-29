@@ -22,7 +22,7 @@ class UserUpdateController extends AbstractController
             $this->addFlash('success', 'Félicitation la modification de vos données personnelles sont enregistrés.');
             return $this->redirectToRoute('app_profile');
         }
-        return $this->render('user_update/index.html.twig', [
+        return $this->render('User/user_update/index.html.twig', [
             'controller_name' => 'UserUpdateController', 'form'=>$form
         ]);
     }

@@ -35,12 +35,10 @@ class UserDeleteController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-
     #[Route('/user/infoDelete/{id}', name: 'app_user_infoDelete')]
     public function infoDelete(User $user): Response
     {
-
-        return $this->render('user_delete/index.html.twig', [
+        return $this->render('User/user_delete/index.html.twig', [
             'user'=>$user
         ]);
     }

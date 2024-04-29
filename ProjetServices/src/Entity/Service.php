@@ -15,7 +15,6 @@ class Service
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\Unique]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +25,12 @@ class Service
 
     #[ORM\Column(nullable: true)]
     private ?int $priceYear = null;
+
+    #[ORM\ManyToOne(inversedBy: 'service')]
+    private ?UserAddress $userAddress = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
     public function getId(): ?int
     {
@@ -76,6 +81,30 @@ class Service
     public function setPriceYear(?int $priceYear): static
     {
         $this->priceYear = $priceYear;
+
+        return $this;
+    }
+
+    public function getUserAddress(): ?UserAddress
+    {
+        return $this->userAddress;
+    }
+
+    public function setUserAddress(?UserAddress $userAddress): static
+    {
+        $this->userAddress = $userAddress;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

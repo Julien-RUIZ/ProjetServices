@@ -22,7 +22,7 @@ class UserAddressUpdateController extends AbstractController
             $this->addFlash('success', 'Modification d\adresse validé');
             return $this->redirectToRoute('app_profile');
         }
-        return $this->render('user_address_update/index.html.twig', [
+        return $this->render('Address/user_address_update/index.html.twig', [
             'controller_name' => 'UserAddressUpdateController', 'form'=>$form
         ]);
     }

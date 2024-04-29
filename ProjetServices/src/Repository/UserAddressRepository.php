@@ -57,4 +57,15 @@ class UserAddressRepository extends ServiceEntityRepository
         );
     }
 
+    public function findAddressAndServiceByUserid($userid): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u','s')
+            ->leftJoin('u.service', 's' )
+            ->setParameter('userid', $userid)
+            ->where('u.user = :userid')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

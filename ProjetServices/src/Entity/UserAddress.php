@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserAddressRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -39,6 +41,17 @@ class UserAddress
 
     #[ORM\Column(nullable: true)]
     private ?bool $rental = null;
+
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress')]
+    private Collection $service;
+
+    public function __construct()
+    {
+        $this->service = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +150,36 @@ class UserAddress
     public function setRental(?bool $rental): static
     {
         $this->rental = $rental;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getService(): Collection
+    {
+        return $this->service;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->service->contains($service)) {
+            $this->service->add($service);
+            $service->setUserAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->service->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getUserAddress() === $this) {
+                $service->setUserAddress(null);
+            }
+        }
 
         return $this;
     }
