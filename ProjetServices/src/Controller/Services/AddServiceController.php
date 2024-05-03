@@ -5,15 +5,19 @@ namespace App\Controller\Services;
 use App\Entity\Service;
 use App\Entity\UserAddress;
 use App\Form\ServiceType;
+use App\Security\Voter\ServiceVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AddServiceController extends AbstractController
 {
     #[Route('/service/registration/{id}', name: 'app_add_service')]
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted(ServiceVoter::CREATE)]
     public function registration(Request $request, EntityManagerInterface $entityManager, UserAddress $address ): Response
     {
         $service = new Service();

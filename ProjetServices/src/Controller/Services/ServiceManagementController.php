@@ -5,10 +5,12 @@ use App\Repository\UserAddressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ServiceManagementController extends AbstractController
 {
     #[Route('/services', name: 'app_service_management')]
+    #[IsGranted('ROLE_USER')]
     public function display(UserAddressRepository $addressRepository): Response
     {
         if ($this->getUser()){

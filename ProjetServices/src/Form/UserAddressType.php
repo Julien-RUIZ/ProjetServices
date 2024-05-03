@@ -25,6 +25,9 @@ class UserAddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('number', IntegerType::class,[
+                'label'=>'Numéro'
+            ])
             ->add('Address', TextType::class,[
                 'required'=>false
             ])
@@ -41,6 +44,10 @@ class UserAddressType extends AbstractType
                 ],
                 'label'=>'Adresse principale ou secondaire',
                 'help'=>'Vous ne pouvez avoir qu\'un domicile en principale. Si vous en avez déjà un, l\'enregistrement se fera automatiquement en secondaire.'
+            ])
+            ->add('additional', TextType::class,[
+                'label'=>'Complément d\'adresse',
+                'help'=>'Résidence, bâtiment, étage'
             ])
             ->add('dwellingType', ChoiceType::class, [
                 'choices'=>[

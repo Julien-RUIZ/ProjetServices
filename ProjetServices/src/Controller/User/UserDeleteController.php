@@ -3,39 +3,31 @@
 namespace App\Controller\User;
 
 use App\Entity\User;
-use App\Repository\UserAddressRepository;
+use App\Security\Voter\UserProjetVoter;
 use Doctrine\ORM\EntityManagerInterface;
-
-
+use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserDeleteController extends AbstractController
 {
-    /**
-     * @param User $user
-     * @param EntityManagerInterface $entityManager
-     * @param UserAddressRepository $userAddressRepository
-     * @return Response
-     * Suppression des address de l'utilisateur avant suppression de l'utilisateur
-     */
     #[Route('/user/delete/{id}', name: 'app_user_delete')]
-    public function delete(User $user, EntityManagerInterface $entityManager, UserAddressRepository $userAddressRepository ): Response
+    #[IsGranted('ROLE_USER')]
+    #[IsGranted(UserProjetVoter::EDIT, subject: 'user')]
+    public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
-        $userid = $user->getId();
-        $bob = $userAddressRepository->findByUserId($userid);
-        for ($i= 0; $i<count($bob); $i++){
-            $entityManager->remove($bob[$i]);
-        }
-        $entityManager->remove($user);
-        $entityManager->flush();
-
-        $this->addFlash('succes','Le compte a était supprimer avec succès');
-        return $this->redirectToRoute('app_home');
+                $entityManager->remove($user);
+                $entityManager->flush();
+                $session = new Session();
+                $session->invalidate();
+                return $this->redirectToRoute('app_logout');
     }
 
     #[Route('/user/infoDelete/{id}', name: 'app_user_infoDelete')]
+    #[IsGranted(UserProjetVoter::EDIT, subject: 'user')]
     public function infoDelete(User $user): Response
     {
         return $this->render('User/user_delete/index.html.twig', [

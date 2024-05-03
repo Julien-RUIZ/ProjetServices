@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Repository\UserAddressRepository;
+use App\Security\Voter\UserProjetVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

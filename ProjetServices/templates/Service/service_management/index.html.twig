@@ -22,7 +22,7 @@
 
                 {% for service in useraddress.service %}
                     <div class="row mt-1 blocServices">
-                        <div class="col-2 tableServices">Nom : {{ service.name}}</div>
+                        <div class="col-3 tableServices">Nom : {{ service.name}}</div>
                         <div class="col-2 tableServices">Type : {{ service.type}}</div>
                         <div class="col-3 tableServices">Lien : {{ service.link}}</div>
                         <div class="col-2 tableServices">Prix :
@@ -32,16 +32,15 @@
                                 {{ service.priceMonth }} €/mois
                             {% endif %}
                         </div>
-                        <div class="col-3 tableServices text-center">
+                        <div class="col-2 tableServices text-center">
                             <div class="row">
-                                <div class="col-lg-4"><a href="#">Modifier</a></div>
-                                <div class="col-lg-4"><a href="#">Supprimer</a></div>
-                                <div class="col-lg-4"><a href="{{ path('app_add_service', {id: useraddress.id}) }}">Ajouter</a></div>
+                                <div class="col-lg-6"><a href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a></div>
+                                <div class="col-lg-6"><a href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a></div>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
+                <div class="mt-5"><a href="{{ path('app_add_service', {id: useraddress.id}) }}" class="btn btn-outline-dark">Ajouter</a></div>
             </div>
         {% endfor %}
     </div>

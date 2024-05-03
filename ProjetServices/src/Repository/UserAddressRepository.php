@@ -53,7 +53,6 @@ class UserAddressRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->setHint(Paginator::HINT_ENABLE_DISTINCT, false)
-
         );
     }
 

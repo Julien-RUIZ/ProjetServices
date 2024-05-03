@@ -48,6 +48,12 @@ class UserAddress
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress')]
     private Collection $service;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $number = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $additional = null;
+
     public function __construct()
     {
         $this->service = new ArrayCollection();
@@ -180,6 +186,30 @@ class UserAddress
                 $service->setUserAddress(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(?int $number): static
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    public function getAdditional(): ?string
+    {
+        return $this->additional;
+    }
+
+    public function setAdditional(?string $additional): static
+    {
+        $this->additional = $additional;
 
         return $this;
     }

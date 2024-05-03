@@ -21,28 +21,25 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    //    /**
-    //     * @return Service[] Returns an array of Service objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Service
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function finduser1($idService){
+        return $this->createQueryBuilder('s')
+            ->select( 's','ua','u')
+            ->leftJoin('s.userAddress', 'ua')
+            ->leftJoin('ua.user', 'u')
+            ->setParameter('idService', $idService)
+            ->where('s.id = :idService')
+            ->getQuery()
+            ->getResult();
+    }
+    public function finduser($idService){
+        return $this->getEntityManager()->createQuery(<<<DQL
+        SELECT s, ua, u
+        FROM App\Entity\Service as s
+        LEFT JOIN s.userAddress as ua
+        LEFT JOIN ua.user as u
+        WHERE :idService = s.id
+    DQL)
+            ->setParameter('idService', $idService)
+            ->getResult();
+    }
 }
