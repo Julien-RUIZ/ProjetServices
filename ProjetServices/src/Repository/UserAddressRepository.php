@@ -38,7 +38,7 @@ class UserAddressRepository extends ServiceEntityRepository
     public function findmainaddress()
     {
         return $this->createQueryBuilder('u')
-            ->select('u.mainAddress')
+            ->select('u.mainAddress', 'u.Address')
             ->getQuery()
             ->getResult();
     }
@@ -49,10 +49,11 @@ class UserAddressRepository extends ServiceEntityRepository
             $this->createQueryBuilder('u')
                 ->setParameter('userid', $userid)
                 ->where('u.user = :userid')
-            ->setFirstResult(($page-1)*$limit)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->setHint(Paginator::HINT_ENABLE_DISTINCT, false)
+                ->orderBy('u.mainAddress', 'DESC')
+                ->setFirstResult(($page-1)*$limit)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->setHint(Paginator::HINT_ENABLE_DISTINCT, false)
         );
     }
 
@@ -63,6 +64,7 @@ class UserAddressRepository extends ServiceEntityRepository
             ->leftJoin('u.service', 's' )
             ->setParameter('userid', $userid)
             ->where('u.user = :userid')
+            ->orderBy('u.mainAddress', 'DESC')
             ->getQuery()
             ->getResult();
     }

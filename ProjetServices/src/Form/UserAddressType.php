@@ -80,7 +80,7 @@ class UserAddressType extends AbstractType
         $main = $this->entityManager->getRepository(UserAddress::class)->findmainaddress();
         if ($data['mainAddress']==='1'){
             for ($i=0; $i<count($main); $i++){
-                if ($main[$i]['mainAddress']===true){
+                if ($main[$i]['mainAddress']===true && $main[$i]['Address'] != $data['Address']){
                     $data['mainAddress']='0';
                     $event->setData($data);
                 }
