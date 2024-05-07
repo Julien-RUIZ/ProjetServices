@@ -44,9 +44,9 @@
                     <p><strong>Ville :</strong> {{ addressUser.city }}</p>
 
                     {% if addressUser.mainaddress == true %}
-                        <p><strong>Habitation :</strong> principale</p>
+                        <p><strong>Habitation :</strong> Principale</p>
                     {% elseif addressUser.mainaddress == false %}
-                        <p><strong>Habitation :</strong> secondaire</p>
+                        <p><strong>Habitation :</strong> Secondaire</p>
                     {% endif %}
 
                     <p><strong>Type de logement :</strong> {{ addressUser.dwellingType }}</p>

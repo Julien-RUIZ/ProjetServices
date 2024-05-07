@@ -3,6 +3,8 @@
 namespace App\Controller\Fixtures;
 
 use App\Entity\User;
+use App\Repository\UserAddressRepository;
+use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,25 +15,36 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserFixtureController extends AbstractController
 {
     #[Route('/fixtureUser', name: 'app_fixture')]
-    public function userFixture(UserPasswordHasherInterface  $hasher, EntityManagerInterface $entityManager): Response
+    public function UserFixture(UserAddressRepository $addressRepository,UserRepository $userRepository,UserPasswordHasherInterface $hashes, EntityManagerInterface $entityManager): Response
     {
-
-        for ($id = 0; $id<10 ; $id++){
-            $user = new User();
-            $user->setUsername('username'.$id);
-            $user->setName('utilisateurName'.$id);
-            $user->setPassword($hasher->hashPassword($user, 'username'.$id));
-            $user->setFirstname('utilisateurFirstname'.$id);
-            $user->setEmail('utilisateur'.$id.'@services.com');
-            $user->setRoles(['ROLE_USER']);
-            $user->setVerified('1');
-            $randomBirthDate = new DateTime();
-            $randomBirthDate->modify('-'.mt_rand(18, 70).' years');
-            $user->setDateOfBirth($randomBirthDate);
-            $user->setTelephone('00000000'.$id);
-            $entityManager->persist($user);
+        $user = $userRepository->findAll();
+        if(!empty($user)){
+            $this->addFlash('danger','Si vous souhaitez réinitialiser un jeu de fixture, merci d\'utiliser le lien : /all/fixture');
+            return $this->redirectToRoute('app_home');
+        }else{
+            for ($id = 0; $id<10 ; $id++){
+                $user = new User();
+                $user->setUsername('username'.$id);
+                $user->setName('utilisateurName'.$id);
+                $user->setPassword($hashes->hashPassword($user, 'username'.$id));
+                $user->setFirstname('utilisateurFirstname'.$id);
+                $user->setEmail('utilisateur'.$id.'@services.com');
+                $user->setRoles(['ROLE_USER']);
+                $user->setVerified('1');
+                $randomBirthDate = new DateTime();
+                $randomBirthDate->modify('-'.mt_rand(18, 70).' years');
+                $user->setDateOfBirth($randomBirthDate);
+                $user->setTelephone('00000000'.$id);
+                $entityManager->persist($user);
+            }
+            $address = $addressRepository->findAll();
+            foreach ($address as $value){
+                $entityManager->remove($value);
+            }
+            $entityManager->flush();
+            return $this->redirectToRoute('app_fixture_address');
         }
-        $entityManager->flush();
-        return $this->redirectToRoute('app_home');
+
+
     }
 }
