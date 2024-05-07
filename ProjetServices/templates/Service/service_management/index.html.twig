@@ -68,8 +68,10 @@
                         {% set totalPriceAlladdressM = totalPriceAlladdressM + totalPriceMonth %}
                     </ul>
                 {% endfor %}
-                Total par an tout habitation : {{ totalPriceAlladdressY }}€/an<br>
-                Total par mois tout habitation : {{ totalPriceAlladdressM }}€/an
+                {% if nbAddress > 1 %}
+                    Total par an toute habitation : {{ totalPriceAlladdressY }}€/an<br>
+                    Total par mois toute habitation : {{ totalPriceAlladdressM }}€/an
+                {% endif %}
             </div>
         </div>
     </div>

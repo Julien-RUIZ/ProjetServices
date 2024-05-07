@@ -10,10 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AllFixtureController extends AbstractController
 {
     #[Route('/all/fixture', name: 'app_all_fixture')]
+
     public function index(UserRepository $userRepository,
                           EntityManagerInterface $entityManager,
                           UserAddressRepository $addressRepository,

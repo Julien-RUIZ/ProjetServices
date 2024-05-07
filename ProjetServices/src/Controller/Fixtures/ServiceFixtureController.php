@@ -10,10 +10,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ServiceFixtureController extends AbstractController
 {
     #[Route('/service/fixture', name: 'app_service_fixture')]
+
     public function ServiceFixture(ServiceRepository $serviceRepository, EntityManagerInterface $entityManager, UserAddressRepository $addressRepository): Response
     {
         $service = $serviceRepository->findAll();
@@ -23,7 +25,7 @@ class ServiceFixtureController extends AbstractController
         }else{
             $address = $addressRepository->findAll();
             $type = ['Eau', 'Gaz', 'Électricité', 'Assurance-habitation', 'Assurance-véhicule', 'Forfait-téléphonie', 'Forfait-Box-internet', 'Autre'];
-            for ($i=0; $i<10; $i++){
+            for ($i=0; $i<20; $i++){
                 $randAddress = rand(0, count($address)-1);
                 $randPrice = rand(5, 1000);
                 $randType = rand(0, count($type)-1);
@@ -33,7 +35,7 @@ class ServiceFixtureController extends AbstractController
                     ->setLink('https://www.'.$type[$randType].'.fr')
                     ->setType($type[$randType])
                     ->setPriceMonth($randPrice)
-                    ->setPriceYear($randPrice * 10);
+                    ->setPriceYear($randPrice * 12);
                 $entityManager->persist($service);
             }
             $entityManager->flush();

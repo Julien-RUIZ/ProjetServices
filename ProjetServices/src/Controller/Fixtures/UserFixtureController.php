@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserFixtureController extends AbstractController
 {
@@ -29,7 +30,11 @@ class UserFixtureController extends AbstractController
                 $user->setPassword($hashes->hashPassword($user, 'username'.$id));
                 $user->setFirstname('utilisateurFirstname'.$id);
                 $user->setEmail('utilisateur'.$id.'@services.com');
-                $user->setRoles(['ROLE_USER']);
+                if ($id === 0){
+                    $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+                }else{
+                    $user->setRoles(['ROLE_USER']);
+                }
                 $user->setVerified('1');
                 $randomBirthDate = new DateTime();
                 $randomBirthDate->modify('-'.mt_rand(18, 70).' years');

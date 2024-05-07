@@ -11,10 +11,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserAddressFixtureController extends AbstractController
 {
     #[Route('/fixture-address', name: 'app_fixture_address')]
+
     public function UserAddressFixture(ServiceRepository $serviceRepository, UserAddressRepository $addressRepository, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
         $address = $addressRepository->findAll();

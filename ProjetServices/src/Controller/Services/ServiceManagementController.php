@@ -15,9 +15,11 @@ class ServiceManagementController extends AbstractController
     {
         if ($this->getUser()){
             $userId = $this->getUser()->getId();
+
             $address = $addressRepository->findAddressAndServiceByUserid($userId);
+            $nbAddress=count($address);
             return $this->render('/Service/service_management/index.html.twig', [
-                'controller_name' => 'ServiceManagementController', 'address'=>$address
+                'controller_name' => 'ServiceManagementController', 'address'=>$address, 'nbAddress'=>$nbAddress
             ]);
         }else{
             $this->addFlash('success', 'Merci de vous identifier ou de vous enregistrer pour l\'utilisation du site.');
