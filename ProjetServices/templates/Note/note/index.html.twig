@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AddNoteController!{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1 class="mt-5 text-center">Notes</h1>
+            <div class="mt-5">
+                {% if form is null %}
+                    <p class="text-center">Bonjour, vous avez la possibilité de gérer différents blocs-notes. Merci d'utiliser le '+' afin de commencer.</p>
+                {% else %}
+                    {% for form in tab %}
+                        <div class="BlocFormNote my-5">
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {{ form_row(form.title) }}
+                            {{ form_row(form.text) }}
+                            {{ form_row(form.save, { 'label': 'Save', 'attr': {'value': form.vars.value.id}}) }}
+                            {{ form_end(form) }}
+                            <div class="BoutonSupprNote">
+                                <a href="{{ path('app_delete_note',{'id':form.vars.value.id}) }}" class="btn btn-outline-dark">Supprimer</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

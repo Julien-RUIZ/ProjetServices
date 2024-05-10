@@ -1,0 +1,12 @@
+{# templates/emails/signup.html.twig #}
+<p>Une nouvelle demande de contact</p>
+
+<ul>
+    <li>Nom : {{ DTO.Name }}</li>
+    <li> Email : {{ DTO.Email }}</li>
+</ul>
+
+<p>
+    <strong>Message</strong> :
+    {{ DTO.Message | nl2br }}
+</p>

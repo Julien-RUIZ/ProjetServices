@@ -2,12 +2,17 @@
 <html>
 {% include 'header.html.twig' %}
     <body>
+
     {% include 'navbar/navbar.html.twig' %}
     <div class="container my-4">
         {% include 'partials/flash.html.twig' %}
     </div>
 
+    <div class="wrapper">
+        <div class="content">
         {% block body %}{% endblock %}
+        </div>
+    {% include 'footer.html.twig' %}
+    </div>
     </body>
-{% include 'footer.html.twig' %}
 </html>

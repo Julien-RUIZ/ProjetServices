@@ -19,6 +19,7 @@ class UpdateServiceController extends AbstractController
     #[IsGranted(ServiceVoter::EDIT, subject: 'service')]
     public function index(Service $service, EntityManagerInterface $entityManager, Request $request, ServiceRepository $serviceRepository): Response
     {
+        //dd($service);
             $form = $this->createForm(ServiceType::class, $service);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
