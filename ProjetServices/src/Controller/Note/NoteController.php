@@ -39,7 +39,6 @@ class NoteController extends AbstractController
             }else{
                 $user = $this->getUser();
                 $notes = $noteRepository->noteByUserid($user->getId());
-                //$tab = [];
                 foreach ($notes as $note){
                     $this->form = $this->createForm(NoteType::class, $note);
                     $this->tab[] = $this->form->createView();

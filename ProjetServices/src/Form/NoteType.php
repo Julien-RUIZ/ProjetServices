@@ -24,6 +24,7 @@ class NoteType extends AbstractType
             ])
             ->add('text', TextareaType::class, [
                 'label'=>'Texte',
+                'sanitize_html' => true,
 
             ])
            ->add('save', SubmitType::class, [

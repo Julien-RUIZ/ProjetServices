@@ -21,12 +21,7 @@ class Note
 
     #[ORM\Column(type: Types::TEXT)]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\Length(
-        min: 2,
-        max: 50,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-    )]
+
     private ?string $text = null;
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
