@@ -7,6 +7,46 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #F2F2F2;
+}
+h1, h2, h3, h4, h5, h6{
+    color: #003366;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    font-family: fangsong;
+}
+
+
+.after-title{
+    width: 200px;
+    border: 3px solid #003366;
+    margin: auto;
+}
+.btn{
+    color: #003366 !important;
+    margin: 0 10px 0 10px;
+}
+.btn:hover{
+    color: #FFA500 !important;
+    background-color: #003366;
+}
+#note_save, #contact_add, #registration_form_save, #service_valid, #user_address_valid, #user_save {
+    background-color: #FFFFFF;
+    border-color: #333333;
+}
+#note_save:hover, #contact_add:hover, #registration_form_save:hover,
+#service_valid:hover, #user_address_valid:hover, #user_save:hover{
+    background-color: #003366;
+}
+
+.navbar{
+    background-color: #003366  !important;
+}
+.navbar a{
+    color: #FFA500;
+}
+.navbar-nav .nav-link.active{
+    color: #FFFFFF ;
 }
 .content {
     flex: 1;
@@ -14,6 +54,22 @@ html, body {
 .BlocFormNote{
     border: 1px solid black;
     padding: 10px 10px 10px 10px;
+    margin: 0 40px 0 40px ;
+    background-color: #FFFFFF;
+    box-shadow: 10px 5px 5px darkgray;
+}
+
+.BlocB a {
+    text-decoration: none;
+    color: #333333;
+}
+.BlocB a:hover{
+    color: #B0413E;
+}
+
+.TitltNote{
+    position: sticky;
+    top: 20px;
 }
 
 .blocInfoPerso, .blocListeHabitation{
@@ -21,7 +77,7 @@ html, body {
     margin: 20px 0 20px 0 ;
     padding: 10px 50px 10px 50px;
     box-shadow: 10px 5px 5px darkgray;
-    background-color: honeydew;
+    background-color: floralwhite;
 }
 
 .blochabitat{
@@ -47,33 +103,50 @@ html, body {
     padding: 5px;
 }
 
+.services .blocServices .modifier, .services .blocServices .supprimer{
+    text-decoration: none;
+    color: #003366;
+}
+.services .blocServices .modifier:hover, .services .blocServices .supprimer:hover{
+    text-decoration: none;
+    color: #FFA500;
+}
+
 .tableAddress{
-    background-color: beige;
+    background-color: floralwhite;
 }
 
 .tableServices{
-    background-color: cornsilk ;
+    background-color: #FFFFFF ;
 }
 
 .blocServices{
     display: flex;
     justify-content: center;
 }
+.loginlogout a{
+    color: #FFA500 !important;
+}
+
+
+.Calculservice {
+    padding: 0 20px 20px 20px;
+}
+
 body{
     min-height: 100vh;
 }
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #003366;
+    color: #FFA500;
     text-align: center;
     padding: 20px 0;
-
     bottom: 0;
     width: 100%;
 }
 footer a{
     text-decoration: none;
-    color: #fff;
+    color: #FFA500;
 }
 footer hr{
     width: 20%;
@@ -86,11 +159,45 @@ footer p{
     display: flex;
     justify-content: end;
 }
+
 @media screen and (min-width: 768px ) {
     .blocProfile{
         display: flex;
     }
     .blocInfoPerso{
         height: 500px;
+    }
+}
+@media screen and (min-width: 980px ) {
+    .ListeTitleResp{
+        display: none;
+    }
+}
+@media screen and (max-width: 980px ) {
+    .ListeTitleResp{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .groupeTitleModif{
+        display: flex;
+        margin: 10px 10px 0 0 ;
+        border: 1px solid black;
+        padding: 0 4px 0 4px;
+    }
+    .BlocB{
+        display: none;
+    }
+    .groupeServiceCalcul{
+        display: flex;
+    }
+    .groupeServiceCalcul > .Calculservice{
+        order : 1
+    }
+    .groupeServiceCalcul > .ServiceAddress{
+        order : 2
+    }
+    .ServiceAddress{
+        margin: 30px 0 30px 0;
     }
 }

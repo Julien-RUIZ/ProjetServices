@@ -28,6 +28,18 @@ class Note
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?bool $reminder = false;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $emailsend = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datemodif = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,4 +80,54 @@ class Note
 
         return $this;
     }
+
+    public function isReminder(): ?bool
+    {
+        return $this->reminder;
+    }
+
+    public function setReminder(bool $reminder): static
+    {
+        $this->reminder = $reminder;
+
+        return $this;
+    }
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+    public function setDate(?\DateTimeInterface $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getEmailsend(): ?string
+    {
+        return $this->emailsend;
+    }
+
+    public function setEmailsend(?string $emailsend): static
+    {
+        $this->emailsend = $emailsend;
+
+        return $this;
+    }
+
+    public function getDatemodif(): ?\DateTimeInterface
+    {
+        return $this->datemodif;
+    }
+
+    public function setDatemodif(\DateTimeInterface $datemodif): static
+    {
+        $this->datemodif = $datemodif;
+
+        return $this;
+    }
+
+
+
+
 }

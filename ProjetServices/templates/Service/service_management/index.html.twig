@@ -3,76 +3,80 @@
 {% block title %}Hello ServiceManagementController!{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5 text-center">Gestion des services</h1>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="mt-3 col-9">
-                {% for useraddress in address %}
-                    <div class="container mt-5">
-                        <div class="row">
-                            <div class="col-3 tableAddress">{{ useraddress.Address }}</div>
-                            <div class="col-3 tableAddress">{{ useraddress.postalCode }} {{ useraddress.City }}</div>
-                            <div class="col-3 tableAddress">
-                                Location :
-                                {% if useraddress.rental==1 %}
-                                    Oui
-                                {% elseif useraddress.rental==0 or useraddress.rental== NULL %}
-                                    Non
-                                {% endif %}
-                            </div>
-                            <div class="col-3 tableAddress">
-                                {% if useraddress.mainaddress == 1 %}
-                                    Habitation: Principale
-                                {% else %}
-                                    Habitation: Secondaire
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% for service in useraddress.service %}
-                            <div class="row mt-1 blocServices">
-                                <div class="col-3 tableServices">Nom : {{ service.name}}</div>
-                                <div class="col-2 tableServices">Type : {{ service.type}}</div>
-                                <div class="col-3 tableServices">Lien : {{ service.link}}</div>
-                                <div class="col-2 tableServices text-center">{{ service.priceYear }} €/an - {{ service.priceMonth }} €/mois</div>
-                                <div class="col-2 tableServices text-center">
-                                    <div class="row">
-                                        <div class="col-xl-6"><a href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a></div>
-                                        <div class="col-xl-6"><a href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a></div>
-                                    </div>
+    <section class="services">
+        <h1 class="">Gestion des services</h1>
+        <div class="after-title"></div>
+        <div class="container-fluid">
+            <div class="groupeServiceCalcul row">
+                <div class="ServiceAddress mt-3 col-12 col-lg-8 col-xl-9">
+                    {% for useraddress in address %}
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-3 tableAddress">{{ useraddress.Address }}</div>
+                                <div class="col-3 tableAddress">{{ useraddress.postalCode }} {{ useraddress.City }}</div>
+                                <div class="col-3 tableAddress">
+                                    Location :
+                                    {% if useraddress.rental==1 %}
+                                        Oui
+                                    {% elseif useraddress.rental==0 or useraddress.rental== NULL %}
+                                        Non
+                                    {% endif %}
+                                </div>
+                                <div class="col-3 tableAddress">
+                                    {% if useraddress.mainaddress == 1 %}
+                                        Habitation: Principale
+                                    {% else %}
+                                        Habitation: Secondaire
+                                    {% endif %}
                                 </div>
                             </div>
-                        {% endfor %}
-                        <div class="mt-3"><a href="{{ path('app_add_service', {id: useraddress.id}) }}" class="btn btn-outline-dark">Ajouter</a></div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="col-3">
-                <h3 class="mt-5 text-center">Calcul du coût théorique</h3>
-                <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, consequuntur, cumque excepturi incidunt ipsum laboriosam nemo nihil numquam optio porro quo rem repudiandae sint, sunt vitae voluptate voluptatibus. Consequuntur, ducimus.</p>
-                {% set totalPriceAlladdressY = 0 %}
-                {% set totalPriceAlladdressM = 0 %}
-                {% for useraddress in address %}
-                    <ul>
-                        <li>
-                            {{ useraddress.address }}
-                        </li>
-                        {% set totalPriceYear = 0 %}
-                        {% set totalPriceMonth = 0 %}
-                        {% for service in useraddress.service %}
-                            {% set totalPriceYear = totalPriceYear + service.priceYear %}
-                            {% set totalPriceMonth = totalPriceMonth + service.priceMonth %}
-                        {% endfor %}
-                        Total par an : {{ totalPriceYear }} €/an<br>
-                        Total par mois : {{ totalPriceMonth }} €/mois
-                        {% set totalPriceAlladdressY = totalPriceAlladdressY + totalPriceYear %}
-                        {% set totalPriceAlladdressM = totalPriceAlladdressM + totalPriceMonth %}
-                    </ul>
-                {% endfor %}
-                {% if nbAddress > 1 %}
-                    Total par an toute habitation : {{ totalPriceAlladdressY }}€/an<br>
-                    Total par mois toute habitation : {{ totalPriceAlladdressM }}€/an
-                {% endif %}
+                            {% for service in useraddress.service %}
+                                <div class="row mt-1 blocServices">
+                                    <div class="col-3 tableServices">Nom : {{ service.name}}</div>
+                                    <div class="col-2 tableServices">Type : {{ service.type}}</div>
+                                    <div class="col-3 tableServices">Lien : {{ service.link}}</div>
+                                    <div class="col-2 tableServices text-center">{{ service.priceYear }} €/an - {{ service.priceMonth }} €/mois</div>
+                                    <div class="col-2 tableServices text-center">
+                                        <div class="row">
+                                            <div class="col-12 col-xxl-6"><a class="modifier" href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a></div>
+                                            <div class="col-12 col-xxl-6"><a class="supprimer" href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="mt-3"><a href="{{ path('app_add_service', {id: useraddress.id}) }}" class="btn btn-outline-dark">Ajouter</a></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="Calculservice col-12 col-lg-4 col-xl-3">
+                    <h3 class="mt-5 text-center">Calcul du coût théorique</h3>
+                    <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, consequuntur, cumque excepturi incidunt ipsum laboriosam nemo nihil numquam optio porro quo rem repudiandae sint, sunt vitae voluptate voluptatibus. Consequuntur, ducimus.</p>
+                    {% set totalPriceAlladdressY = 0 %}
+                    {% set totalPriceAlladdressM = 0 %}
+                    {% for useraddress in address %}
+                        <ul>
+                            <li>
+                                {{ useraddress.address }}
+                            </li>
+                            {% set totalPriceYear = 0 %}
+                            {% set totalPriceMonth = 0 %}
+                            {% for service in useraddress.service %}
+                                {% set totalPriceYear = totalPriceYear + service.priceYear %}
+                                {% set totalPriceMonth = totalPriceMonth + service.priceMonth %}
+                            {% endfor %}
+                            Total par an : {{ totalPriceYear }} €/an<br>
+                            Total par mois : {{ totalPriceMonth }} €/mois
+                            {% set totalPriceAlladdressY = totalPriceAlladdressY + totalPriceYear %}
+                            {% set totalPriceAlladdressM = totalPriceAlladdressM + totalPriceMonth %}
+                        </ul>
+                    {% endfor %}
+                    {% if nbAddress > 1 %}
+                        Total par an toute habitation : {{ totalPriceAlladdressY }} €/an<br>
+                        Total par mois toute habitation : {{ totalPriceAlladdressM }} €/an
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
 {% endblock %}

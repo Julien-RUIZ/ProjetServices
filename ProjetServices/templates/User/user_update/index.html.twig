@@ -3,8 +3,11 @@
 {% block title %}Hello UserUpdateController!{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5 text-center">Modification des informations personnelles</h1>
-    <div class="container">
-        {{ form(form)}}
-    </div>
+    <section class="update-user">
+        <h1>Modification des informations personnelles</h1>
+        <div class="after-title"></div>
+        <div class="container my-5">
+            {{ form(form)}}
+        </div>
+    </section>
 {% endblock %}

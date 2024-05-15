@@ -144,6 +144,11 @@
       <path value="$PROJECT_DIR$/ProjetServices/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/symfony/ux-toggle-password" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/symfony/html-sanitizer" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/psr/http-message" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

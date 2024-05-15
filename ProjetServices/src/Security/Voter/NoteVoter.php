@@ -2,35 +2,31 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Note;
 use App\Entity\User;
-use App\Entity\UserAddress;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 
-class AddressVoter extends Voter
+class NoteVoter extends Voter
 {
-    public const EDIT = 'ADDRESS_EDIT';
-    public const VIEW = 'ADDRESS_VIEW';
-    public const CREATE = 'ADDRESS_CREATE';
-
+    public const EDIT = 'POST_EDIT';
+    public const VIEW = 'POST_VIEW';
+    public const DELETE = 'POST_DELETE';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::CREATE]) || in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\UserAddress;
+        return in_array($attribute, [self::EDIT, self::DELETE])
+            && $subject instanceof \App\Entity\Note;
     }
 
     /**
-     * @param UserAddress|null $subject
+     * @param Note|null $subject
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        //$attribute c'est la permission
-        //$subject c'est notre entité, donc pour nous userAddress
-        //TokenInterface et le token de sécurité
-
         $user = $token->getUser();
+
 
         // if the user is anonymous, do not grant access
         if (!$user instanceof User) {
@@ -44,7 +40,7 @@ class AddressVoter extends Voter
                 break;
 
             case self::VIEW:
-            case self::CREATE:
+                // logic to determine if the user can VIEW
                 return true;
                 break;
         }

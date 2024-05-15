@@ -3,8 +3,11 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-    <h1 class="mt-5 text-center">Formulaire de contact</h1>
-    <div class="container">
-        {{ form(form)}}
-    </div>
+    <section class="contact">
+        <h1>Formulaire de contact</h1>
+        <div class="after-title"></div>
+        <div class="container my-5">
+            {{ form(form)}}
+        </div>
+    </section>
 {% endblock %}

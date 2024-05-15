@@ -281,7 +281,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $note->setUser(null);
             }
         }
-
         return $this;
     }
+
 }

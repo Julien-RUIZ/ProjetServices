@@ -4,30 +4,71 @@
 
 {% block body %}
     <section>
-        <div class="container">
-            <h1 class="mt-5 text-center">Notes</h1>
-            <div class="mt-5">
+        <div class="container-fluid">
+            <h1 id="Notes">Notes & relances</h1>
+            <div class="after-title"></div>
                 {% if form is null %}
                     <p class="text-center">Bonjour, vous avez la possibilité de gérer différents blocs-notes. Merci d'utiliser le '+' afin de commencer.</p>
                 {% else %}
-                    {% for form in tab %}
-                        <div class="BlocFormNote my-5">
-                            {{ form_start(form) }}
-                            {{ form_errors(form) }}
-                            {{ form_row(form.title) }}
-                            {{ form_row(form.text) }}
-                            {{ form_row(form.save, { 'label': 'Save', 'attr': {'value': form.vars.value.id}}) }}
-                            {{ form_end(form) }}
-                            <div class="BoutonSupprNote">
-                                <a href="{{ path('app_delete_note',{'id':form.vars.value.id}) }}" class="btn btn-outline-dark">Supprimer</a>
+                    <div class="ListeTitleResp mt-5">
+                        {% for note in notes %}
+                            <div class="groupeTitleModif">
+                                <div class="title"><a href="#ancre{{ note.id }}">{{ note.title }}</a></div>
+                                <div class="modif">{{ note.datemodif|date("d/m/Y h:i") }}</div>
                             </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="BlocA col-12 col-lg-8 col-xl-9">
+                                {% for form in tab %}
+                                    <div class="BlocFormNote my-5" id="ancre{{ form.vars.value.id }}">
+                                        {{ form_start(form) }}
+                                        {{ form_errors(form) }}
+                                        {{ form_row(form.title) }}
+                                        {{ form_row(form.text) }}
+                                        {{ form_row(form.reminder) }}
+                                        {% if form.date.vars.value is defined %}
+                                            {{ form_row(form.date) }}
+                                        {% endif %}
+                                        {% if form.emailsend.vars.value is defined %}
+                                            {{ form_row(form.emailsend) }}
+                                        {% endif %}
+                                        <div class="btn-outline-dark">
+                                            {{ form_row(form.save, { 'label': 'Valider / Relancer', 'attr': {'value': form.vars.value.id}, }) }}
+                                        </div>
+
+                                        {{ form_end(form) }}
+                                        <div class="BoutonSupprNote">
+                                            <a href="{{ path('app_delete_note',{'id':form.vars.value.id}) }}" class="btn btn-outline-dark">Supprimer</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <aside class="BlocB col-lg-4 col-xl-3">
+                                <div class="TitltNote my-5">
+                                    <h3 class="text-center mb-5">Liste des titres </h3>
+                                    <div class="row mb-2">
+                                       <div class="col-7 "><strong>Titre</strong></div>
+                                       <div class="col-5"><strong>Création/modif</strong></div>
+                                    </div>
+                                    <ul>
+                                       {% for note in notes %}
+                                         <li>
+                                           <div class="row">
+                                             <div class="col-7"><a href="#ancre{{ note.id }}">{{ note.title }}</a></div>
+                                               <div class="col-5">{{ note.datemodif|date("d/m/Y h:i") }}</div>
+                                             </div>
+                                         </li>
+                                       {% endfor %}
+                                    </ul>
+                                </div>
+                            </aside>
                         </div>
-                    {% endfor %}
+                    </div>
                 {% endif %}
-            </div>
-            <div>
-                <a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a>
-            </div>
+            <div><a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a></div>
+            <div><a href="#Notes" class="btn btn-outline-dark mb-5">Retour sur haut de page</a></div>
         </div>
     </section>
 {% endblock %}

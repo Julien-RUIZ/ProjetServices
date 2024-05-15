@@ -13,7 +13,7 @@ class AddNoteController extends AbstractController
 {
     #[Route('/add/note', name: 'app_add_note')]
     #[IsGranted('ROLE_USER')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, Reminder $reminder): Response
     {
         if (!empty($this->getUser())){
             $user = $this->getUser();
@@ -21,6 +21,7 @@ class AddNoteController extends AbstractController
             $note->setTitle('');
             $note->setText('');
             $note->setUser($user);
+            $note->setdatemodif($reminder->CurrentDate());
             $entityManager->persist($note);
             $entityManager->flush();
             return $this->redirectToRoute('app_note');

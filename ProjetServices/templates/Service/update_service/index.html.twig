@@ -3,10 +3,13 @@
 {% block title %}Hello UpdateServiceController!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="mt-5 text-center">Formulaire de modification de service</h1>
-        <div class="mt-5">
-            {{ form(form) }}
+    <section class="update-service">
+        <div class="container">
+            <h1>Formulaire de modification de service</h1>
+            <div class="after-title"></div>
+            <div class="my-5">
+                {{ form(form) }}
+            </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

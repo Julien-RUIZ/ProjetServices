@@ -24,6 +24,7 @@ class NoteRepository extends ServiceEntityRepository
     public function noteByUserid($id){
         return $this->createQueryBuilder('n')
             ->select('n')
+            ->orderBy('n.datemodif', 'DESC')
             ->where( 'n.user = :userid')
             ->setParameter('userid', $id)
             ->getQuery()

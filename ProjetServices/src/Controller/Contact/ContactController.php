@@ -35,9 +35,8 @@ class ContactController extends AbstractController
                 return $this->redirectToRoute('app_home');
 
             }catch (TransportExceptionInterface $transportException){
-        $this->addFlash('danger', 'Impossible d\'envoyer le mail');
-    }
-
+                $this->addFlash('danger', 'Impossible d\'envoyer le mail');
+            }
         }
 
 
