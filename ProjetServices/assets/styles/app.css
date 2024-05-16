@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6{
 .btn{
     color: #003366 !important;
     margin: 0 10px 0 10px;
+    background-color: #FFFFFF;
 }
 .btn:hover{
     color: #FFA500 !important;
