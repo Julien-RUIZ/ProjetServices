@@ -9,6 +9,7 @@ use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Event\PreSetDataEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,6 +21,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceType extends AbstractType
 {
+
+private $datapriceMonth;
+private $datapriceYear;
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -56,16 +60,23 @@ class ServiceType extends AbstractType
             ->add('valid', SubmitType::class, [
                 'label'=>'Enregistrer'
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, $this->ServicePrice(...) )
-        ;
-    }
+            ->addEventListener(FormEvents::PRE_SET_DATA, $this->PriceChange(...))
+            ->addEventListener(FormEvents::PRE_SUBMIT, $this->ServicePrice(...));
 
+    }
+    public function PriceChange(PreSetDataEvent $preSetDataEvent){
+        if($preSetDataEvent->getData()->getPriceMonth() !== null && $preSetDataEvent->getData()->getPriceYear() !== null){
+            $this->datapriceMonth = $preSetDataEvent->getData()->getPriceMonth();
+            $this->datapriceYear = $preSetDataEvent->getData()->getPriceYear();
+        }
+
+    }
     public function ServicePrice(PreSubmitEvent $event):void
     {
         $data = $event->getData();
-        if (empty($data['priceYear'])){
+        if (empty($data['priceYear']) || intval($data['priceMonth']) != $this->datapriceMonth && intval($data['priceYear']) === $this->datapriceYear){
             $data['priceYear'] = $data['priceMonth'] * 12;
-        }elseif (empty($data['priceMonth'])){
+        }elseif (empty($data['priceMonth']) || intval($data['priceMonth']) === $this->datapriceMonth && intval($data['priceYear']) != $this->datapriceYear){
             $data['priceMonth'] = $data['priceYear'] / 12;
         }
         $event->setData($data);
