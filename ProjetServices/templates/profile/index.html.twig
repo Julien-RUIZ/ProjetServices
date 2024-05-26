@@ -7,25 +7,41 @@
         <h1>Profil de l'utilisateur</h1>
         <div class="after-title"></div>
         <div class="blocProfile container mt-5">
-            <div class="blocInfoPerso col-12 col-md-6 mx-md-2">
-                <h3 class="text-center my-4">Informations personnelles</h3>
-                {% if app.user.isVerified != true %}
-                    <p>Merci de valider votre mail afin d'avoir accès à la totalité du site internet et des options.</p>
-                {% endif %}
-                <p><strong>Pseudo :</strong> {{ user.username }}</p>
-                <p><strong>Nom :</strong> {{ user.name }}</p>
-                <p><strong>Prénom :</strong> {{ user.firstname }}</p>
-                <p><strong>Date de naissance :</strong> {{ user.dateOfBirth |date("m/d/Y")}}</p>
-                <p><strong>Email :</strong> {{ user.email }}</p>
-                <p><strong>Numéro de téléphone :</strong> {{ user.telephone }}</p>
-                <div class="button">
-                    <a href="{{ path('app_user_update', {id:user.id}) }}" class="btn btn-outline-dark"">Modifier</a>
+            <div class=" col-12 col-md-6 mx-md-2">
+                <div class="blocInfoPerso">
+                    <h3 class="text-center my-4">Informations personnelles</h3>
+                    {% if app.user.isVerified != true %}
+                        <p>Merci de valider votre mail afin d'avoir accès à la totalité du site internet et des options.</p>
+                    {% endif %}
+                    <p><strong>Pseudo :</strong> {{ user.username }}</p>
+                    <p><strong>Nom :</strong> {{ user.name }}</p>
+                    <p><strong>Prénom :</strong> {{ user.firstname }}</p>
+                    <p><strong>Date de naissance :</strong> {{ user.dateOfBirth |date("m/d/Y")}}</p>
+                    <p><strong>Email :</strong> {{ user.email }}</p>
+                    <p><strong>Numéro de téléphone :</strong> {{ user.telephone }}</p>
+                    <div class="button">
+                        <a href="{{ path('app_user_update', {id:user.id}) }}" class="btn btn-outline-dark">Modifier</a>
+                    </div>
+                    <hr>
+                    <div class="button">
+                        <a href="{{ path('app_user_infoDelete', {id:user.id}) }}" class="btn btn-outline-dark">Supprimer compte</a>
+                    </div>
                 </div>
-                <hr>
-                <div class="button">
-                    <a href="{{ path('app_user_infoDelete', {id:user.id}) }}" class="btn btn-outline-dark"">Supprimer compte</a>
+                <div class="blocIntegrationExtraction">
+                    <h3 class="text-center my-4">Gestion des données</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cum dicta dolorem
+                        doloremque explicabo fugiat minima non nostrum odio pariatur quas similique, sint
+                        velit! Cupiditate distinctio dolorem non odio velit?
+                    </p>
+                    <div class="boutonIntegrationExtraction py-4">
+                        <a href="#" class="btn btn-outline-dark mx-2">Extraction</a>
+                        <a href="#" class="btn btn-outline-dark mx-2">intégration</a>
+                    </div>
+
                 </div>
             </div>
+
             {% if app.user.isVerified == true %}
                 <div class="blocListeHabitation col-12 col-md-6 mx-md-2">
                     <h3 class="text-center my-4">Liste des habitations</h3>
@@ -59,8 +75,8 @@
                                 <p><strong>Location :</strong> Non </p>
                             {% endif %}
                             <div class="button mb-2">
-                                <a href="{{ path('app_useraddress_delete', {id:addressUser.id }) }}" class="btn btn-outline-dark" mx-2">Supprimer</a>
-                                <a href="{{ path('app_useraddress_update', {id:addressUser.id }) }}" class="btn btn-outline-dark" mx-2">Modifier</a>
+                                <a href="{{ path('app_useraddress_delete', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Supprimer</a>
+                                <a href="{{ path('app_useraddress_update', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Modifier</a>
                             </div>
                         </div>
                         <hr>
@@ -82,7 +98,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <a href="{{ path('app_useraddress_add') }}" class="btn btn-outline-dark" mx-2">+</a>
+                    <a href="{{ path('app_useraddress_add') }}" class="btn btn-outline-dark mx-2">+</a>
                 </div>
             {% endif %}
         </div>
