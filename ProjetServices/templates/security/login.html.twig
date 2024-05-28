@@ -4,35 +4,39 @@
 
 {% block body %}
     <section class="login">
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-            <h1>Formulaire de connexion</h1>
-            <div class="after-title"></div>
+        <div class="container">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger text-center">Mot de passe ou identifiant invalide</div>
+                {% endif %}
+                <h1>Formulaire de connexion</h1>
+                <div class="after-title"></div>
 
-            {% if app.user %}
-                <div class="h5 mb-3 mt-5 text-center">
-                    <p>You are logged in as {{ app.user.userIdentifier }}</p>
-                    <p>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</p>
-                    <p>Vous pouvez vous déconnecter en utilisant le lien ci-dessous ou revenir sur la page principale : </p>
-                    <a href="{{ path('app_logout') }}">Logout</a>
-                </div>
-            {% else %}
-                <div class="container my-5">
-                    <label for="inputUsername">Username</label>
-                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <br>
-                    <button class="btn btn-outline-dark" type="submit">
-                        Sign in
-                    </button>
-                </div>
-                <div class="text-center my-5"><p><strong>Si vou n'avez pas encore de compte, merci de vous enregistrer en suivant le lien : </strong></p>
-                    <a href="{{ path('app_register') }}">Création d'un compte</a></div>
-            {% endif %}
-        </form>
+                {% if app.user %}
+                    <div class="h5 mb-3 mt-5 text-center">
+                        <p>You are logged in as {{ app.user.userIdentifier }}</p>
+                        <p>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</p>
+                        <p>Vous pouvez vous déconnecter en utilisant le lien ci-dessous ou revenir sur la page principale : </p>
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% else %}
+                    <div class=" my-5">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                        <label for="inputPassword">Password</label>
+                        <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <br>
+                        <button class="btn btn-outline-dark" type="submit">
+                            Connexion
+                        </button>
+                    </div>
+                    <div class="text-center my-5"><p><strong>Si vou n'avez pas encore de compte, merci de vous enregistrer en suivant le lien : </strong></p>
+                        <a href="{{ path('app_register') }}">Création d'un compte</a></div>
+                {% endif %}
+            </form>
+        </div>
+
     </section>
 {% endblock %}

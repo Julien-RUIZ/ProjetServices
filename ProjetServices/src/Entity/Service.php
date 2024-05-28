@@ -4,33 +4,44 @@ namespace App\Entity;
 
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
+
 class Service
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['jsondataextract'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['jsondataextract'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['jsondataextract'])]
     private ?string $link = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?int $priceMonth = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?int $priceYear = null;
 
-    #[ORM\ManyToOne(inversedBy: 'service')]
+    #[ORM\Column(length: 255)]
+    #[Groups(['jsondataextract'])]
+    private ?string $type = null;
+
+    #[ORM\ManyToOne(targetEntity: UserAddress::class, cascade: ['persist'], inversedBy: 'service')]
+    #[Groups(['jsondataextract'])]
     private ?UserAddress $userAddress = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type = null;
+
 
     public function getId(): ?int
     {

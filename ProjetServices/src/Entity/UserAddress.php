@@ -6,6 +6,7 @@ use App\Repository\UserAddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserAddressRepository::class)]
@@ -15,31 +16,39 @@ class UserAddress
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['jsondataextract'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?string $Address = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 7, nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?int $postalCode = null;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(['jsondataextract'])]
     private ?bool $mainAddress = false;
 
-    #[ORM\ManyToOne(inversedBy: 'userAddresses')]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], inversedBy: 'userAddresses')]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['jsondataextract'])]
     private ?string $dwellingType = null;
 
     #[ORM\Column]
+    #[Groups(['jsondataextract'])]
     private ?int $dwellingSize = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['jsondataextract'])]
     private ?bool $rental = null;
 
     /**

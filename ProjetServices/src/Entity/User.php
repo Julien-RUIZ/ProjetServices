@@ -43,15 +43,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Regex(pattern: '/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/')]
     private ?string $email = null;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\Regex(pattern: '/^[a-zA-Z -]+$/')]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\Regex(pattern: '/^[a-zA-ZàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ -]+$/u')]
     private ?string $firstname = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserDeleteController extends AbstractController
 {
-    #[Route('/user/delete/{id}', name: 'app_user_delete')]
+    #[Route('/user/delete/{id}', name: 'app_user_delete',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(UserProjetVoter::EDIT, subject: 'user')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response

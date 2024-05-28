@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserAddressDeleteController extends AbstractController
 {
-    #[Route('/useraddress/delete/{id}', name: 'app_useraddress_delete')]
+    #[Route('/useraddress/delete/{id}', name: 'app_useraddress_delete',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(AddressVoter::EDIT, subject: 'userAddress')]
     public function index(EntityManagerInterface $em, UserAddress $userAddress): Response

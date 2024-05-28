@@ -3,7 +3,7 @@
 namespace App\Controller\Note;
 
 use App\Repository\NoteRepository;
-use App\Service\SendMail;
+use App\Service\Mail\SendMail;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Reminder

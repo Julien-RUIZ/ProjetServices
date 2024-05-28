@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DeleteServiceController extends AbstractController
 {
-    #[Route('/delete/service/{id}', name: 'app_delete_service')]
+    #[Route('/delete/service/{id}', name: 'app_delete_service',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ServiceVoter::CREATE, subject: 'service')]
     public function index(Service $service, EntityManagerInterface $entityManager): Response

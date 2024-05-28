@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Service;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\This;
 
 /**
  * @extends ServiceEntityRepository<Service>
@@ -19,6 +20,16 @@ class ServiceRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Service::class);
+    }
+
+    public function UserAdressAndServiceByUserid($userid){
+        return $this->createQueryBuilder('s')
+            ->select('s', 'ua')
+            ->leftJoin('s.userAddress', 'ua')
+            ->setParameter('iduser', $userid)
+            ->where('ua.user = :iduser')
+            ->getQuery()
+            ->getResult();
     }
 
     public function finduser1($idService){

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 class UpdateServiceController extends AbstractController
 {
-    #[Route('/update/service/{id}', name: 'app_update_service')]
+    #[Route('/update/service/{id}', name: 'app_update_service',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ServiceVoter::EDIT, subject: 'service')]
     public function index(Service $service, EntityManagerInterface $entityManager, Request $request, ServiceRepository $serviceRepository): Response

@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserAddressUpdateController extends AbstractController
 {
-    #[Route('/userAddress/update/{id}', name: 'app_useraddress_update')]
+    #[Route('/userAddress/update/{id}', name: 'app_useraddress_update',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(AddressVoter::EDIT, subject: 'userAddress')]
     public function index(Request $request, UserAddress $userAddress, EntityManagerInterface $em): Response

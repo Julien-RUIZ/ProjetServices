@@ -26,9 +26,9 @@ class UserFixtureController extends AbstractController
             for ($id = 0; $id<10 ; $id++){
                 $user = new User();
                 $user->setUsername('username'.$id);
-                $user->setName('utilisateurName'.$id);
-                $user->setPassword($hashes->hashPassword($user, 'username'.$id));
-                $user->setFirstname('utilisateurFirstname'.$id);
+                $user->setName('Utilisateur Name');
+                $user->setPassword($hashes->hashPassword($user, 'Username'.$id.'%'));
+                $user->setFirstname('Firstname');
                 $user->setEmail('utilisateur'.$id.'@services.com');
                 if ($id === 0){
                     $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);

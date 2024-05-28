@@ -46,6 +46,7 @@ class UserAddressType extends AbstractType
                 'help'=>'Vous ne pouvez avoir qu\'un domicile en principale. Si vous en avez déjà un, l\'enregistrement se fera automatiquement en secondaire.'
             ])
             ->add('additional', TextType::class,[
+                'required'=>false,
                 'label'=>'Complément d\'adresse',
                 'help'=>'Résidence, bâtiment, étage'
             ])
