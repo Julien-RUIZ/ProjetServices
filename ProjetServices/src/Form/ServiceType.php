@@ -33,6 +33,7 @@ private $datapriceYear;
             ->add('type', ChoiceType::class, [
                 'choices'=>[
                     '--'=>'--',
+                    'Impôts'=>'Impôts',
                     'Eau'=>'Eau',
                     'Électricité'=>'Électricité',
                     'Gaz'=>'Gaz',

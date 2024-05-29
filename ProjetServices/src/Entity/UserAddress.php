@@ -63,6 +63,12 @@ class UserAddress
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $additional = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $rentprice = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $RealEstateAgency = null;
+
     public function __construct()
     {
         $this->service = new ArrayCollection();
@@ -219,6 +225,30 @@ class UserAddress
     public function setAdditional(?string $additional): static
     {
         $this->additional = $additional;
+
+        return $this;
+    }
+
+    public function getRentprice(): ?int
+    {
+        return $this->rentprice;
+    }
+
+    public function setRentprice(?int $rentprice): static
+    {
+        $this->rentprice = $rentprice;
+
+        return $this;
+    }
+
+    public function getRealEstateAgency(): ?string
+    {
+        return $this->RealEstateAgency;
+    }
+
+    public function setRealEstateAgency(?string $RealEstateAgency): static
+    {
+        $this->RealEstateAgency = $RealEstateAgency;
 
         return $this;
     }

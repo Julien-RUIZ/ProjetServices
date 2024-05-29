@@ -32,13 +32,11 @@ class ServiceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function finduser1($idService){
+    public function findservice($idUseraddress){
         return $this->createQueryBuilder('s')
-            ->select( 's','ua','u')
-            ->leftJoin('s.userAddress', 'ua')
-            ->leftJoin('ua.user', 'u')
-            ->setParameter('idService', $idService)
-            ->where('s.id = :idService')
+            ->select( 's')
+            ->setParameter('idUseraddress', $idUseraddress)
+            ->where('s.userAddress = :idUseraddress')
             ->getQuery()
             ->getResult();
     }

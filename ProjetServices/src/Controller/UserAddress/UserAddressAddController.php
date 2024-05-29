@@ -5,6 +5,7 @@ namespace App\Controller\UserAddress;
 use App\Entity\UserAddress;
 use App\Form\UserAddressType;
 use App\Security\Voter\AddressVoter;
+use App\Service\Rental\AutoAddRentalService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class UserAddressAddController extends AbstractController
     #[Route('/useraddress/add', name: 'app_useraddress_add')]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(AddressVoter::CREATE)]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function index(Request $request, EntityManagerInterface $em, AutoAddRentalService $addRentalService): Response
     {
         $address = new UserAddress();
         $form= $this->createForm(UserAddressType::class, $address);
@@ -25,6 +26,9 @@ class UserAddressAddController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $user = $this->getUser();
             $address->setUser($user);
+            if ($address->isRental()){
+                $addRentalService->addRental($address->getRentprice(), $address, $address->getRealEstateAgency());
+            }
             $em->persist($address);
             $em->flush();
             $this->addFlash('success', 'Ajout d\'adresse validé' );

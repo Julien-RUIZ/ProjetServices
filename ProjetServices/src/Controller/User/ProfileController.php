@@ -23,7 +23,6 @@ class ProfileController extends AbstractController
             $page = $request->query->getInt('page', 1);
             $limit = 3;
             $address = $userAddressRepository->paginateUserAddress($page, $limit, $user_id, );
-            //dd($address);
             $nbAddress = $address->count();
             $maxPage = ceil($address->count()/$limit);
             return $this->render('profile/index.html.twig', [

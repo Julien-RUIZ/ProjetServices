@@ -29,12 +29,15 @@ class UserAddressType extends AbstractType
                 'label'=>'Numéro'
             ])
             ->add('Address', TextType::class,[
+                'label'=>'Adresse',
                 'required'=>false
             ])
             ->add('city', TextType::class,[
+                'label'=>'Ville',
                 'required'=>false
             ])
             ->add('postalCode', IntegerType::class,[
+                'label'=>'Code postal',
                 'required'=>false
             ])
             ->add('mainAddress', ChoiceType::class,[
@@ -66,8 +69,17 @@ class UserAddressType extends AbstractType
                     'oui'=>'1',
                     'non'=>'0',
                     ],
-                'label'=>'Location'
+                'label'=>'Location',
+                'help'=>'Si vous êtes en location, merci d\'indiquer le prix du loyer ainsi que l\'agence immobilière.'
                 ])
+            ->add('rentprice', IntegerType::class, [
+                'label'=>'Prix du loyer en €/mois',
+                'required'=>false
+            ])
+            ->add('RealEstateAgency', TextType::class, [
+                'label'=>'Agence Immobilière',
+                'required'=>false
+            ])
             ->add('valid', SubmitType::class,[
                 'label'=>'Enregistrer'
             ])
