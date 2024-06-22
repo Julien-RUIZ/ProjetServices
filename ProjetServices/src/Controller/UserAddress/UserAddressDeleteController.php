@@ -20,7 +20,7 @@ class UserAddressDeleteController extends AbstractController
     {
         $em->remove($userAddress);
         $em->flush();
-        $this->addFlash('success', 'Suppression d\'adresse validé');
+        $this->addFlash('success', 'Suppression d\'adresse validée');
         return $this->redirectToRoute('app_profile');
     }
 }

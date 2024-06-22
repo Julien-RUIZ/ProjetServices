@@ -24,7 +24,7 @@ class UpdateServiceController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
                 $entityManager->flush();
-                $this->addFlash('success', 'Modification du service enregistré');
+                $this->addFlash('success', 'Modification du service enregistrée');
                 return $this->redirectToRoute('app_service_management');
             }
             return $this->render('Service/update_service/index.html.twig', [

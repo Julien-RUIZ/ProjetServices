@@ -9,44 +9,61 @@
         <div class="container-fluid">
             <div class="groupeServiceCalcul row">
                 <div class="ServiceAddress mt-3 col-12 col-lg-8 col-xl-9">
-                    {% for useraddress in address %}
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-3 tableAddress">{{ useraddress.Address }}</div>
-                                <div class="col-3 tableAddress">{{ useraddress.postalCode }} {{ useraddress.City }}</div>
-                                <div class="col-3 tableAddress">
-                                    Location :
-                                    {% if useraddress.rental==1 %}
-                                        Oui
-                                    {% elseif useraddress.rental==0 or useraddress.rental== NULL %}
-                                        Non
-                                    {% endif %}
-                                </div>
-                                <div class="col-3 tableAddress">
-                                    {% if useraddress.mainaddress == 1 %}
-                                        Habitation: Principale
-                                    {% else %}
-                                        Habitation: Secondaire
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% for service in useraddress.service %}
-                                <div class="row mt-1 blocServices">
-                                    <div class="col-3 tableServices">Nom : {{ service.name}}</div>
-                                    <div class="col-2 tableServices">Type : {{ service.type}}</div>
-                                    <div class="col-3 tableServices">Lien : {{ service.link}}</div>
-                                    <div class="col-2 tableServices text-center">{{ service.priceYear }} €/an - {{ service.priceMonth }} €/mois</div>
-                                    <div class="col-2 tableServices text-center">
-                                        <div class="row">
-                                            <div class="col-12 col-xxl-6"><a class="modifier" href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a></div>
-                                            <div class="col-12 col-xxl-6"><a class="supprimer" href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a></div>
-                                        </div>
+
+                    {% if address is empty %}
+                        <div class="mt-5">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad at consectetur culpa dolorem dolorum ducimus, eius ex necessitatibus non officia omnis perspiciatis, ratione sed sequi.
+                                fuga sapiente voluptate! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, ad at consectetur culpa dolorem dolorum ducimus, eius ex necessitatibus non officia omnis perspiciatis, ratione sed sequi.
+                                fuga sapiente voluptate!
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio modi optio porro! Aliquam consectetur labore nulla pariatur quas quidem, quis rem saepe.
+                                Atque dolore facere nemo, officiis repellat soluta voluptas!
+                            </p>
+                            <a href="{{ path('app_profile')}}" class="btn btn-outline-dark">Ajouter une adresse</a>
+                        </div>
+                    {% else %}
+                        {% for useraddress in address %}
+
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-3 tableAddress">{{ useraddress.Address }}</div>
+                                    <div class="col-3 tableAddress">{{ useraddress.postalCode }} {{ useraddress.City }}</div>
+                                    <div class="col-3 tableAddress">
+                                        Location :
+                                        {% if useraddress.rental==1 %}
+                                            Oui
+                                        {% elseif useraddress.rental==0 or useraddress.rental== NULL %}
+                                            Non
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-3 tableAddress">
+                                        {% if useraddress.mainaddress == 1 %}
+                                            Habitation: Principale
+                                        {% else %}
+                                            Habitation: Secondaire
+                                        {% endif %}
                                     </div>
                                 </div>
-                            {% endfor %}
-                            <div class="mt-3"><a href="{{ path('app_add_service', {id: useraddress.id}) }}" class="btn btn-outline-dark">Ajouter</a></div>
-                        </div>
-                    {% endfor %}
+                                {% for service in useraddress.service %}
+                                    <div class="row mt-1 blocServices">
+                                        <div class="col-3 tableServices">Nom : {{ service.name}}</div>
+                                        <div class="col-2 tableServices">Type : {{ service.type}}</div>
+                                        <div class="col-3 tableServices">Lien : {{ service.link}}</div>
+                                        <div class="col-2 tableServices text-center">{{ service.priceYear }} €/an - {{ service.priceMonth }} €/mois</div>
+                                        <div class="col-2 tableServices text-center">
+                                            <div class="row">
+                                                <div class="col-12 col-xxl-6"><a class="modifier" href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a></div>
+                                                <div class="col-12 col-xxl-6"><a class="supprimer" href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="mt-3"><a href="{{ path('app_add_service', {id: useraddress.id}) }}" class="btn btn-outline-dark">Ajouter</a></div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="Calculservice col-12 col-lg-4 col-xl-3">
                     <h3 class="mt-5 text-center">Calcul du coût théorique</h3>

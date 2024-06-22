@@ -36,7 +36,7 @@ class UserAddressUpdateController extends AbstractController
                 $em->remove($this->rentService);
             }
             $em->flush();
-            $this->addFlash('success', 'Modification d\'adresse validé');
+            $this->addFlash('success', 'Modification d\'adresse validée');
             return $this->redirectToRoute('app_profile');
         }
         return $this->render('Address/user_address_update/index.html.twig', [

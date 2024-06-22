@@ -45,42 +45,51 @@
             {% if app.user.isVerified == true %}
                 <div class="blocListeHabitation col-12 col-md-6 mx-md-2">
                     <h3 class="text-center my-4">Liste des habitations</h3>
-                    {% for addressUser in address  %}
-                        <div class="blochabitat">
-                            {% if addressUser.number != null%}
-                                <p><strong>Numéro :</strong> {{ addressUser.number }}</p>
-                            {% endif %}
+                    {% if address is empty %}
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dignissimos iure mollitia natus rem sit tenetur ut!
+                            Laudantium maiores molestias porro possimus praesentium, quis quisquam vel. Consectetur doloremque maiores odio?
+                        </p>
 
-                            <p><strong>Adresse :</strong> {{ addressUser.address }}</p>
+                    {% else %}
+                        {% for addressUser in address  %}
+                            <div class="blochabitat">
+                                {% if addressUser.number != null%}
+                                    <p><strong>Numéro :</strong> {{ addressUser.number }}</p>
+                                {% endif %}
 
-                            {% if addressUser.additional != null%}
-                                <p><strong>Complément d'adresse :</strong> {{ addressUser.additional }}</p>
-                            {% endif %}
+                                <p><strong>Adresse :</strong> {{ addressUser.address }}</p>
 
-                            <p><strong>Code postal :</strong> {{ addressUser.postalcode }}</p>
-                            <p><strong>Ville :</strong> {{ addressUser.city }}</p>
+                                {% if addressUser.additional != null%}
+                                    <p><strong>Complément d'adresse :</strong> {{ addressUser.additional }}</p>
+                                {% endif %}
 
-                            {% if addressUser.mainaddress == true %}
-                                <p><strong>Habitation :</strong> Principale</p>
-                            {% elseif addressUser.mainaddress == false %}
-                                <p><strong>Habitation :</strong> Secondaire</p>
-                            {% endif %}
+                                <p><strong>Code postal :</strong> {{ addressUser.postalcode }}</p>
+                                <p><strong>Ville :</strong> {{ addressUser.city }}</p>
 
-                            <p><strong>Type de logement :</strong> {{ addressUser.dwellingType }}</p>
-                            <p><strong>Taille en m² :</strong> {{ addressUser.dwellingSize }}</p>
+                                {% if addressUser.mainaddress == true %}
+                                    <p><strong>Habitation :</strong> Principale</p>
+                                {% elseif addressUser.mainaddress == false %}
+                                    <p><strong>Habitation :</strong> Secondaire</p>
+                                {% endif %}
 
-                            {% if addressUser.rental == true %}
-                                <p><strong>Location :</strong> Oui </p>
-                            {% else  %}
-                                <p><strong>Location :</strong> Non </p>
-                            {% endif %}
-                            <div class="button mb-2">
-                                <a href="{{ path('app_useraddress_delete', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Supprimer</a>
-                                <a href="{{ path('app_useraddress_update', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Modifier</a>
+                                <p><strong>Type de logement :</strong> {{ addressUser.dwellingType }}</p>
+                                <p><strong>Taille en m² :</strong> {{ addressUser.dwellingSize }}</p>
+
+                                {% if addressUser.rental == true %}
+                                    <p><strong>Location :</strong> Oui </p>
+                                {% else  %}
+                                    <p><strong>Location :</strong> Non </p>
+                                {% endif %}
+                                <div class="button mb-2">
+                                    <a href="{{ path('app_useraddress_delete', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Supprimer</a>
+                                    <a href="{{ path('app_useraddress_update', {id:addressUser.id }) }}" class="btn btn-outline-dark mx-2">Modifier</a>
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                    {% endfor %}
+                            <hr>
+                        {% endfor %}
+
+                    {% endif %}
                     <div class="row">
                         <div class="col-4 paginationAddress">
                             {% if page > 1  %}

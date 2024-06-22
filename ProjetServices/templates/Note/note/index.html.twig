@@ -8,7 +8,20 @@
             <h1 id="Notes">Notes & Relances</h1>
             <div class="after-title"></div>
                 {% if form is null %}
-                    <p class="text-center">Bonjour, vous avez la possibilité de gérer différents blocs-notes. Merci d'utiliser le '+' afin de commencer.</p>
+                    <div class="container mt-5">
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et netus et
+                                malesuada fames. Morbi tempus iaculis urna id volutpat lacus laoreet non curabitur. Phasellus faucibus scelerisque eleifend donec pretium
+                                vulputate sapien. Elementum nisi quis eleifend quam adipiscing vitae. Ante metus dictum at tempor commodo ullamcorper. Leo a diam sollicitudin
+                                tempor id. Elit sed vulputate mi sit amet mauris commodo. Hac habitasse platea dictumst quisque. Vel turpis nunc eget lorem dolor sed viverra
+                                ipsum nunc. Eleifend quam adipiscing vitae proin sagittis. Curabitur vitae nunc sed velit. Tempor orci dapibus ultrices in. Sed ullamcorper
+                                morbi tincidunt ornare massa. Laoreet suspendisse interdum consectetur libero id. Nulla porttitor massa id neque aliquam vestibulum morbi.
+                                Vitae auctor eu augue ut lectus arcu bibendum at varius. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor.</p>
+                        </div>
+                        <div>
+                            <a href="{{ path('app_add_note') }}" class="btn btn-outline-dark my-5">Ajouter votre première note</a>
+                        </div>
+                    </div>
                 {% else %}
                     <div class="ListeTitleResp mt-5">
                         {% for note in notes %}
@@ -66,9 +79,9 @@
                             </aside>
                         </div>
                     </div>
+                    <div><a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a></div>
+                    <div><a href="#Notes" class="btn btn-outline-dark mb-5">Retour sur haut de page</a></div>
                 {% endif %}
-            <div><a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a></div>
-            <div><a href="#Notes" class="btn btn-outline-dark mb-5">Retour sur haut de page</a></div>
         </div>
     </section>
 {% endblock %}

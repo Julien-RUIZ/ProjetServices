@@ -54,7 +54,7 @@ class UserAddress
     /**
      * @var Collection<int, Service>
      */
-    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress')]
+    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['persist', 'remove'])]
     private Collection $service;
 
     #[ORM\Column(nullable: true)]
