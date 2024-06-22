@@ -33,6 +33,11 @@
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
 
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="DATABASE_URL" value="mysql://root@127.0.0.1:3306/projetservices_test?serverVersion=8.2.0&charset=utf8"/>
+    </php>
+
     <extensions>
     </extensions>
 </phpunit>

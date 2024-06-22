@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="bob">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="bob" />
+              <option name="relativePathToSchema" value="https://getcomposer.org/schema.json" />
+              <option name="schemaVersion" value="JSON Schema version 7" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="https://getcomposer.org/schema.json" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="ProjetServices/data/JsonDataExtract/jsondataextract341.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

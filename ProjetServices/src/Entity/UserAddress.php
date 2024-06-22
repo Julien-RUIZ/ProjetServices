@@ -55,6 +55,7 @@ class UserAddress
      * @var Collection<int, Service>
      */
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['persist', 'remove'])]
+    #[Groups(['jsondataextract'])]
     private Collection $service;
 
     #[ORM\Column(nullable: true)]
@@ -77,6 +78,11 @@ class UserAddress
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getAddress(): ?string

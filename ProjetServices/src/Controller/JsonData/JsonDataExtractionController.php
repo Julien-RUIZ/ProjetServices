@@ -2,12 +2,14 @@
 
 namespace App\Controller\JsonData;
 
+use App\Entity\Service;
 use App\Repository\ServiceRepository;
 use App\Repository\UserAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonDataExtractionController extends AbstractController
@@ -17,19 +19,39 @@ class JsonDataExtractionController extends AbstractController
     {
         if($this->getUser()){
             $userid = $this->getUser()->getid();
-            $jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
+            //$jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
+            $jasondata = $userAddressRepository->findAddressAndServiceByUserid($userid);
+
             $serializJson = $serializer->serialize($jasondata, 'json',[
                 'groups'=>'jsondataextract'
             ]);
+
+
+            //mettre en fichier dans le dossier data
             $projectDir = $this->getParameter('kernel.project_dir');
             $filePath = $projectDir.'/data/JsonDataExtract/jsondataextract'.$userid.'.json';
             file_put_contents($filePath, $serializJson);
 
+            //Suppression des infos aprés la sérialisation
             $AllAddressByUser = $userAddressRepository->findByUserId($userid);
             foreach ($AllAddressByUser as $address){
                 $entityManager->remove($address);
             }
+
             $entityManager->flush();
+
+
+
+
+
+
+
+
+
+
+
+
+
             $this->addFlash('success', 'L\'extraction des données est complète !!!');
             return $this->redirectToRoute('app_profile');
         }else{

@@ -25,14 +25,16 @@ doctrine:
         controller_resolver:
             auto_mapping: true
 
+# Configuration spécifique à l'environnement de test
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            url: '%env(resolve:DATABASE_URL)%'
 
 when@prod:
     doctrine:
+        dbal:
+            url: '%env(resolve:DATABASE_URL_PROD)%'
         orm:
             auto_generate_proxy_classes: false
             proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
