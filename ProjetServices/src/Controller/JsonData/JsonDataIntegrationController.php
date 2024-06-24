@@ -2,40 +2,43 @@
 
 namespace App\Controller\JsonData;
 
-
-use App\Entity\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-
 
 class JsonDataIntegrationController extends AbstractController
 {
-    #[Route('/json/data/integration', name: 'app_json_data_integration', methods: ['POST'])]
-    public function index(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager): Response
+    #[Route('/json/data/integration', name: 'app_json_data_integration')]
+    public function index(Filesystem $filesystem, SerializerInterface $serializer, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()){
+            $userid = $this->getUser()->getid();
+            $link = $this->getParameter('kernel.project_dir');
+            $linkJson = $link.'/data/JsonDataExtract/jsondataextract'.$userid.'.json';
 
+            if ($filesystem->exists($linkJson)){
+                $datajson = file_get_contents($linkJson);
 
-        $recep = $serializer->deserialize($request->getContent(), 'App\Entity\Service[]', 'json', [
-        AbstractNormalizer::GROUPS=>"jsondataextract"
-        ]);
-        //dd($recep);
-        foreach ($recep as $datajson){
-            $datajson->getUserAddress()->setUser($this->getUser());
-            $entityManager->persist($datajson);
+                $deserializeJson = $serializer->deserialize($datajson, 'App\Entity\Service[]', 'json',[
+                    'groups'=>'jsondataextract'
+                ]);
+                foreach ($deserializeJson as $datajson){
+                    $datajson->getUserAddress()->setUser($this->getUser());
+                    $entityManager->persist($datajson);
+                }
+                $entityManager->flush();
+
+                $this->addFlash('success', 'L\'intégration de vos données a été réalisée avec succès.' );
+            }else{
+                $this->addFlash('success', 'Vous ne possédez pas de document pour l\'intégration de données.');
+            }
+            return $this->redirectToRoute('app_profile');
+        }else{
+            $this->addFlash('success', 'Merci de vous identifier ou de vous enregistrer pour l\'utilisation du site.');
+            return $this->redirectToRoute('app_login');
         }
-        $entityManager->flush();
-        return new JsonResponse($request->getContent(), 200, [], true);
-
     }
 }
