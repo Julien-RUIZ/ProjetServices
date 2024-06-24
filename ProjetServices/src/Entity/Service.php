@@ -38,7 +38,7 @@ class Service
     private ?string $type = null;
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, cascade: ['persist', 'remove', 'refresh'], inversedBy: 'service')]
-
+    #[Groups(['jsondataextract'])]
     private ?UserAddress $userAddress = null;
 
 

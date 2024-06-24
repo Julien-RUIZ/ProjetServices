@@ -54,8 +54,7 @@ class UserAddress
     /**
      * @var Collection<int, Service>
      */
-    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['persist', 'remove'])]
-    #[Groups(['jsondataextract'])]
+    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['persist', 'remove', 'refresh'])]
     private Collection $service;
 
     #[ORM\Column(nullable: true)]

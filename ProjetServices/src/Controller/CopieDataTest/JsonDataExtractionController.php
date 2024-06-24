@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\JsonData;
+namespace App\Controller\CopieDataTest;
 
 use App\Entity\Service;
 use App\Repository\ServiceRepository;
@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonDataExtractionController extends AbstractController
 {
-    #[Route('/json/data/extraction', name: 'app_json_data_extraction')]
+    //#[Route('/json/data/extraction', name: 'app_json_data_extraction')]
     public function index(UserAddressRepository $userAddressRepository, ServiceRepository $serviceRepository, SerializerInterface $serializer, EntityManagerInterface $entityManager): Response
     {
         if($this->getUser()){

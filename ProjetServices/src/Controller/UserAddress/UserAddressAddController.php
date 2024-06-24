@@ -27,7 +27,7 @@ class UserAddressAddController extends AbstractController
             $user = $this->getUser();
             $address->setUser($user);
             if ($address->isRental()){
-                $addRentalService->addRental($address->getRentprice(), $address, $address->getRealEstateAgency());
+               $addRentalService->addRental($address->getRentprice(), $address, $address->getRealEstateAgency());
             }
             $em->persist($address);
             $em->flush();
