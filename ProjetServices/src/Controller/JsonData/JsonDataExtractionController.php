@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonDataExtractionController extends AbstractController
@@ -20,9 +21,8 @@ class JsonDataExtractionController extends AbstractController
             $userid = $this->getUser()->getid();
             $jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
 
-
             $serializJson = $serializer->serialize($jasondata, 'json',[
-                'groups'=>'jsondataextract'
+                AbstractNormalizer::GROUPS=>'jsondataextract',
             ]);
 
             //mettre en fichier dans le dossier data
@@ -35,12 +35,11 @@ class JsonDataExtractionController extends AbstractController
             foreach ($AllAddressByUser as $address){
                 $entityManager->remove($address);
             }
-
             $entityManager->flush();
 
-            return new JsonResponse($serializJson, 200, [], true);
-            //$this->addFlash('success', 'L\'extraction des données est complète !!!');
-            //return $this->redirectToRoute('app_profile');
+            //return new JsonResponse($serializJson, 200, [], true);
+            $this->addFlash('success', 'L\'extraction des données est complète !!!');
+            return $this->redirectToRoute('app_profile');
         }else{
             $this->addFlash('success', 'Merci de vous identifier ou de vous enregistrer pour l\'utilisation du site.');
             return $this->redirectToRoute('app_login');

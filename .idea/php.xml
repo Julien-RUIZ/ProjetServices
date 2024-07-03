@@ -149,6 +149,8 @@
       <path value="$PROJECT_DIR$/ProjetServices/vendor/league/uri-interfaces" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/ProjetServices/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/ProjetServices/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
