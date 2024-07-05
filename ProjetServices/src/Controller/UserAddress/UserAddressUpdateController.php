@@ -2,11 +2,11 @@
 
 namespace App\Controller\UserAddress;
 
+use App\Controller\UserAddress\Rental\AutoAddRentalService;
 use App\Entity\UserAddress;
 use App\Form\UserAddressType;
 use App\Repository\ServiceRepository;
 use App\Security\Voter\AddressVoter;
-use App\Service\Rental\AutoAddRentalService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

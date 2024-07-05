@@ -2,13 +2,14 @@
 
 namespace App\Controller\Note;
 
+use App\Interface\MailInterface;
 use App\Repository\NoteRepository;
 use App\Service\Mail\SendMail;
 use Doctrine\ORM\EntityManagerInterface;
 
 class Reminder
 {
-    public function __construct(private NoteRepository $noteRepository, private SendMail $sendMail, private EntityManagerInterface $entityManager)
+    public function __construct(private NoteRepository $noteRepository, private MailInterface $mail, private EntityManagerInterface $entityManager)
     {
     }
     public function ReminderOn(){
@@ -30,7 +31,7 @@ class Reminder
                     $note->setEmailsend(null);
                     $this->entityManager->persist($note);
                     $this->entityManager->flush();
-                    $this->sendMail->sendMail($Emailsend, $note->getUser()->getEmail(), $note->getTitle(), $note->getText());
+                    $this->mail->sendMail($Emailsend, $note->getUser()->getEmail(), $note->getTitle(), $note->getText());
                 }
            }
         }

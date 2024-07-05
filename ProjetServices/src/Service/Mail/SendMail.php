@@ -2,10 +2,11 @@
 
 namespace App\Service\Mail;
 
+use App\Interface\MailInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
-class SendMail
+class SendMail implements MailInterface
 {
     public function __construct(private readonly MailerInterface $mailer)
     {

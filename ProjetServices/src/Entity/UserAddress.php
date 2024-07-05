@@ -16,23 +16,23 @@ class UserAddress
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $Address = null;
 
     #[ORM\Column(length: 20, nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 7, nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $postalCode = null;
 
     #[ORM\Column(type: 'boolean')]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?bool $mainAddress = false;
 
     #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'], inversedBy: 'userAddresses')]
@@ -40,33 +40,38 @@ class UserAddress
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $dwellingType = null;
 
     #[ORM\Column]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $dwellingSize = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?bool $rental = null;
 
     /**
      * @var Collection<int, Service>
      */
-    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['persist', 'remove', 'refresh'])]
+    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'userAddress', cascade: ['remove', 'persist'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private Collection $service;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $number = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $additional = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $rentprice = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $RealEstateAgency = null;
 
     public function __construct()
@@ -77,11 +82,6 @@ class UserAddress
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getAddress(): ?string

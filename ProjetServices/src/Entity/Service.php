@@ -14,31 +14,32 @@ class Service
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $link = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceMonth = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceYear = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['jsondataextract'])]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $type = null;
 
-    #[ORM\ManyToOne(targetEntity: UserAddress::class, cascade: ['persist'], inversedBy: 'service')]
-    #[Groups(['jsondataextract'])]
+    #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'service')]
+    #[ORM\JoinColumn(nullable: false)]
+
     private ?UserAddress $userAddress = null;
 
 
@@ -46,11 +47,6 @@ class Service
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getName(): ?string

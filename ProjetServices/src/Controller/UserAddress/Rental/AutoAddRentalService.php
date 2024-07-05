@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Service\Rental;
+namespace App\Controller\UserAddress\Rental;
 
 use App\Entity\Service;
-use App\Repository\UserAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

@@ -17,9 +17,8 @@ class UpdateServiceController extends AbstractController
     #[Route('/update/service/{id}', name: 'app_update_service',requirements: ['id'=>'\d+'])]
     #[IsGranted('ROLE_USER')]
     #[IsGranted(ServiceVoter::EDIT, subject: 'service')]
-    public function index(Service $service, EntityManagerInterface $entityManager, Request $request, ServiceRepository $serviceRepository): Response
+    public function index(Service $service, EntityManagerInterface $entityManager, Request $request): Response
     {
-        //dd($service);
             $form = $this->createForm(ServiceType::class, $service);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
