@@ -12,13 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonDataIntegrationController extends AbstractController
 {
     #[Route('/json/data/integration', name: 'app_json_data_integration')]
     #[IsGranted('ROLE_USER')]
-    public function index(Filesystem $filesystem, SerializerInterface $serializer, EntityManagerInterface $entityManager, UserAddressRepository $userAddressRepository): Response
+    public function index(Filesystem $filesystem, SerializerInterface $serializer,
+                          EntityManagerInterface $entityManager,
+                          UserAddressRepository $userAddressRepository): Response
     {
         if ($this->getUser()){
             $userid = $this->getUser()->getid();
@@ -29,15 +32,19 @@ class JsonDataIntegrationController extends AbstractController
                 $datajson = file_get_contents($linkJson);
 
                 $deserializeJson = $serializer->deserialize($datajson, 'App\Entity\UserAddress[]', 'json',[
-                    AbstractNormalizer::GROUPS=>'jsondataInteg',
+                    'groups'=>'jsondataInteg',
                 ]);
-
                 foreach ($deserializeJson as $data){
+                    $collectionService = $data->getService();
+                  dd($datajson, count($collectionService));
+                    foreach ($collectionService as $service){
+                        dd($service);
+                    }
                    // $data->getUserAddress()->setUser($this->getUser());
                     $data->setUser($this->getUser());
-                    $entityManager->persist($data);
+                    //$entityManager->persist($data);
                 }
-                $entityManager->flush();
+                //$entityManager->flush();
 
                 $this->addFlash('success', 'L\'intégration de vos données a été réalisée avec succès.' );
             }else{

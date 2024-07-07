@@ -39,7 +39,6 @@ class Service
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'service')]
     #[ORM\JoinColumn(nullable: false)]
-
     private ?UserAddress $userAddress = null;
 
 

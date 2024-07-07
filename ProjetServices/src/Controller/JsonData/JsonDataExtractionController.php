@@ -11,19 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class JsonDataExtractionController extends AbstractController
 {
     #[Route('/json/data/extraction', name: 'app_json_data_extraction')]
     #[IsGranted('ROLE_USER')]
-    public function index(UserAddressRepository $userAddressRepository, ServiceRepository $serviceRepository, SerializerInterface $serializer, EntityManagerInterface $entityManager): JsonResponse
+    public function index(UserAddressRepository $userAddressRepository,
+                          ServiceRepository $serviceRepository,
+                          SerializerInterface $serializer,
+                          EntityManagerInterface $entityManager): JsonResponse
     {
         if($this->getUser()){
             $userid = $this->getUser()->getid();
             //$jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
-            $jasondata = $userAddressRepository->findAddressAndServiceByUserid($userid);
+            //$jasondata = $userAddressRepository->findAddressAndServiceByUserid($userid);
+            $jasondata = $userAddressRepository->findBy(['user'=>$userid]);
 
+//dd($jasondata);
             $serializJson = $serializer->serialize($jasondata, 'json',[
                 AbstractNormalizer::GROUPS=>'jsondataextract',
             ]);
