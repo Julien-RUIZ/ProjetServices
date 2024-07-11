@@ -26,7 +26,7 @@ final class MaintenanceListener
         if(!empty($this->security->getUser())){
             $role = $this->security->getUser()->getRoles();
             if (self::IS_MAINTENANCE === true && !in_array(self::ROLE_MAINTENANCE, $role)){
-                $response = new Response($this->twig->render('maintenance/index.html.twig'));
+                $response = new Response($this->twig->render('Maintenance/index.html.twig'));
                 $event->setResponse($response);
             }
         }
