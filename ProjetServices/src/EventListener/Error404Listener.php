@@ -21,10 +21,10 @@ final class Error404Listener
         $error = $event->getThrowable();
         if ($error instanceof HttpException) {
             $statusCode = $error->getStatusCode();
-        }
-        if ($statusCode === self::STATUS404){
-            $resp = new Response($this->twig->render('Exception/Error404.html.twig'));
-            $event->setResponse($resp);
+            if ($statusCode === self::STATUS404){
+                $resp = new Response($this->twig->render('Exception/Error404.html.twig'));
+                $event->setResponse($resp);
+            }
         }
     }
 }
