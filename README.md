@@ -7,3 +7,5 @@ Sur la page Service, vous pourrez ajouter ou supprimer des éléments de consomm
 La page Notes fonctionne comme un outil de rappel. Vous pouvez y créer des pense-bêtes pour vous-même et même programmer des rappels par email à une date spécifique.
 
 En outre, ce projet inclut une page dédiée à l'erreur 404 et une autre pour la maintenance du site. L'accès à cette dernière peut varier selon le rôle de l'utilisateur.
+
+À la racine du projet, vous trouverez un fichier SQL contenant la structure de la base de données ainsi qu'un jeu de données initial.
