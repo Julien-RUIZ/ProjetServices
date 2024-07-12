@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'ReminderNote',
-    description: 'Note reminder with scheduled email sending',
+    description: 'Note reminder with scheduled email sending. Use : php bin/console ReminderNote',
 )]
 class ReminderNoteCommand extends Command
 {
