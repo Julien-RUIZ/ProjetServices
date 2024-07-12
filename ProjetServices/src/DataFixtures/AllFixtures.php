@@ -12,6 +12,13 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * To use fixtures use the command: php bin/console doctrine:fixtures:load
+ * For the connection here is an example login:
+ * Username : username0
+ * Password : Username0%
+ */
+
 class AllFixtures extends Fixture
 {
     public function __construct(private UserPasswordHasherInterface $hasher, private UserRepository $userRepository, private UserAddressRepository $addressRepository )

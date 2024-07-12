@@ -6,6 +6,10 @@ use App\Interface\MailInterface;
 use App\Repository\NoteRepository;
 use App\Service\Mail\SendMail;
 use Doctrine\ORM\EntityManagerInterface;
+/**
+ * Class used for email reminders of notes. It will be executed by order. The objective is to subsequently carry out a cron task.
+ * Read : app/Command/ReminderNoteCommand.php
+ */
 
 class Reminder
 {

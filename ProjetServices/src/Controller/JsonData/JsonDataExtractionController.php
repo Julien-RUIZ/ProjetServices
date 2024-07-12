@@ -7,6 +7,7 @@ use App\Repository\UserAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -19,36 +20,31 @@ class JsonDataExtractionController extends AbstractController
     #[Route('/json/data/extraction', name: 'app_json_data_extraction')]
     #[IsGranted('ROLE_USER')]
     public function index(UserAddressRepository $userAddressRepository,
-                          ServiceRepository $serviceRepository,
                           SerializerInterface $serializer,
-                          EntityManagerInterface $entityManager): JsonResponse
+                          EntityManagerInterface $entityManager): RedirectResponse
     {
         if($this->getUser()){
             $userid = $this->getUser()->getid();
-            //$jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
-            //$jasondata = $userAddressRepository->findAddressAndServiceByUserid($userid);
             $jasondata = $userAddressRepository->findBy(['user'=>$userid]);
 
-//dd($jasondata);
             $serializJson = $serializer->serialize($jasondata, 'json',[
                 AbstractNormalizer::GROUPS=>'jsondataextract',
             ]);
 
-            //mettre en fichier dans le dossier data
+            //put in file in data folder
             $projectDir = $this->getParameter('kernel.project_dir');
             $filePath = $projectDir.'/data/JsonDataExtract/jsondataextract'.$userid.'.json';
             file_put_contents($filePath, $serializJson);
 
-            //Suppression des infos aprés la sérialisation
-            //$AllAddressByUser = $userAddressRepository->findByUserId($userid);
-            //foreach ($AllAddressByUser as $address){
-            //    $entityManager->remove($address);
-            //}
+            //Deleting information after serialization
+            $AllAddressByUser = $userAddressRepository->findByUserId($userid);
+            foreach ($AllAddressByUser as $address){
+                $entityManager->remove($address);
+            }
             $entityManager->flush();
 
-            return new JsonResponse($serializJson, 200, [], true);
-            //$this->addFlash('success', 'L\'extraction des données est complète !!!');
-            //return $this->redirectToRoute('app_profile');
+            $this->addFlash('success', 'L\'extraction des données est complète !!!');
+            return $this->redirectToRoute('app_profile');
         }else{
             $this->addFlash('success', 'Merci de vous identifier ou de vous enregistrer pour l\'utilisation du site.');
             return $this->redirectToRoute('app_login');

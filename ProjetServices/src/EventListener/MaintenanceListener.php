@@ -10,6 +10,10 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Twig\Environment;
 
+/**
+ * For activation, set IS_MAINTENANCE to true.
+ * The user must have the ROLE_ADMIN to access the site.
+ */
 final class MaintenanceListener
 {
     public const IS_MAINTENANCE = false;
@@ -21,8 +25,6 @@ final class MaintenanceListener
     #[AsEventListener(event: KernelEvents::REQUEST, priority: 1)]
     public function onKernelRequest(RequestEvent $event): void
     {
-        //dd($this->security->getUser());
-
         if(!empty($this->security->getUser())){
             $role = $this->security->getUser()->getRoles();
             if (self::IS_MAINTENANCE === true && !in_array(self::ROLE_MAINTENANCE, $role)){
@@ -30,7 +32,5 @@ final class MaintenanceListener
                 $event->setResponse($response);
             }
         }
-
-
     }
 }

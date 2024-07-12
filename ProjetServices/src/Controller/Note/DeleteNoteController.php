@@ -20,12 +20,8 @@ class DeleteNoteController extends AbstractController
     #[IsGranted(NoteVoter::EDIT, subject: 'note')]
     public function index(Note $note, EntityManagerInterface $entityManager): Response
     {
-
             $entityManager->remove($note);
             $entityManager->flush();
             return $this->redirectToRoute('app_note');
-
-
-
     }
 }
