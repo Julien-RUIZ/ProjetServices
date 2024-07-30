@@ -1,4 +1,4 @@
-Le ProjetService est un prototype développé sous Symfony 7. Il permettra de visualiser et de suivre la consommation en fonction des différents services (abonnements, forfaits ou dépenses diverses), ainsi que de fournir une estimation des dépenses par habitation.
+Le ProjetService est un prototype développé sous Symfony 7. Il permet de visualiser et de suivre la consommation en fonction des différents services (abonnements, forfaits ou dépenses diverses), ainsi que de fournir une estimation des dépenses par habitation.
 
 La page Profil vous permettra de gérer et éditer la liste des habitations que vous possédez, ainsi que d'accéder à la modification de vos données personnelles.
 
