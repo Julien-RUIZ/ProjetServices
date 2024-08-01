@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 12 juil. 2024 à 07:21
+-- Généré le : jeu. 01 août 2024 à 16:23
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -34,6 +34,24 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `golden_book`
+--
+
+DROP TABLE IF EXISTS `golden_book`;
+CREATE TABLE IF NOT EXISTS `golden_book` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(15) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `text` longtext COLLATE utf8mb3_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_67E09804A76ED395` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -89,11 +107,11 @@ CREATE TABLE IF NOT EXISTS `service` (
   `link` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
   `price_month` int DEFAULT NULL,
   `price_year` int DEFAULT NULL,
-  `user_address_id` int DEFAULT NULL,
+  `user_address_id` int NOT NULL,
   `type` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_E19D9AD252D06999` (`user_address_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1244 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1405 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -115,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `telephone` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_USERNAME` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=536 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -140,11 +158,17 @@ CREATE TABLE IF NOT EXISTS `user_address` (
   `real_estate_agency` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_5543718BA76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=723 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=764 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `golden_book`
+--
+ALTER TABLE `golden_book`
+  ADD CONSTRAINT `FK_67E09804A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `note`
@@ -156,7 +180,7 @@ ALTER TABLE `note`
 -- Contraintes pour la table `service`
 --
 ALTER TABLE `service`
-  ADD CONSTRAINT `FK_E19D9AD252D06999` FOREIGN KEY (`user_address_id`) REFERENCES `user_address` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_E19D9AD252D06999` FOREIGN KEY (`user_address_id`) REFERENCES `user_address` (`id`);
 
 --
 -- Contraintes pour la table `user_address`
