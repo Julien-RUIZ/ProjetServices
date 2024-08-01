@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5, h6{
 
 .services .blocServices .modifier, .services .blocServices .supprimer{
     text-decoration: none;
-    color: #003366;
+    color: inherit;
 }
 .services .blocServices .modifier:hover, .services .blocServices .supprimer:hover{
     text-decoration: none;
@@ -201,10 +201,12 @@ footer p{
     color : green !important;
 }
 
-.RedGoldenBook:hover, .GreenGoldenBook:hover, .DeleteGoldenBook:hover{
+.RedGoldenBook:hover, .GreenGoldenBook:hover, .DeleteGoldenBook:hover, .supprService:hover, .modifService:hover{
     color: #FFA500 !important;
     background-color: #003366;
 }
+
+
 
 @media screen and (min-width: 768px ) {
     .blocProfile{
