@@ -2,9 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\GoldenBook;
 use App\Entity\Service;
 use App\Entity\User;
 use App\Entity\UserAddress;
+use App\Interface\LoremInterface;
 use App\Repository\UserAddressRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -21,13 +23,24 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AllFixtures extends Fixture
 {
-    public function __construct(private UserPasswordHasherInterface $hasher, private UserRepository $userRepository, private UserAddressRepository $addressRepository )
+    public function __construct(private UserPasswordHasherInterface $hasher, private UserRepository $userRepository, private UserAddressRepository $addressRepository, private LoremInterface $lorem )
     {
 
     }
 
     public function load(ObjectManager $manager): void
     {
+        for($i=0; $i<5; $i++){
+            $goldenBook = new GoldenBook();
+            $goldenBook->setUsername('person'.$i)
+                ->setText($this->lorem->CreateLorem())
+                ->setDate(new \DateTimeImmutable())
+                ->setActive(true);
+            $manager->persist($goldenBook);
+        }
+        $manager->flush();
+
+
         for ($i = 0; $i<5 ; $i++){
             $user = new User();
             $user->setId($i);

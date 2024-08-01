@@ -15,7 +15,9 @@ h1, h2, h3, h4, h5, h6{
     margin: 10px 0 20px 0;
     font-family: fangsong;
 }
-
+.active{
+    color: #F5F5F5 !important;
+}
 
 .after-title{
     width: 200px;
@@ -48,6 +50,10 @@ h1, h2, h3, h4, h5, h6{
 }
 .navbar-nav .nav-link.active{
     color: #FFFFFF ;
+}
+
+.nav-item :hover, .navbar .navbar-brand :hover{
+    color: #FFFFFF !important;
 }
 .content {
     flex: 1;
@@ -155,6 +161,9 @@ footer a{
     text-decoration: none;
     color: #FFA500;
 }
+.FooterList a:hover{
+    color: #FFFFFF;
+}
 footer hr{
     width: 20%;
     margin: auto;
@@ -165,6 +174,36 @@ footer p{
 .BoutonSupprNote{
     display: flex;
     justify-content: end;
+}
+.GoldenBookCard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.GoldenBookCard .card-username,.GoldenBookCard .card-date{
+    text-align: end;
+}
+.GoldenBookCard .textGoldenBook{
+    text-align: left;
+}
+.GoldenBookCard th, .GoldenBookCard td{
+    text-align: center;
+}
+.RedGoldenBook a, .GreenGoldenBook a, .DeleteGoldenBook a{
+    text-decoration: none;
+    color: inherit;
+
+}
+.RedGoldenBook{
+    color: red !important;
+}
+.GreenGoldenBook{
+    color : green !important;
+}
+
+.RedGoldenBook:hover, .GreenGoldenBook:hover, .DeleteGoldenBook:hover{
+    color: #FFA500 !important;
+    background-color: #003366;
 }
 
 @media screen and (min-width: 768px ) {

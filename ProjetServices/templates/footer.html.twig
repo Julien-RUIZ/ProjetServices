@@ -1,9 +1,13 @@
 
 
 <footer>
-   <p><a href="{{ path('app_contact') }}">Formulaire de Contact</a></p>
+    <div class="FooterList">
+        <a class="nav-link {% if app.request.pathInfo == '/contact'  %} active {% endif %}" href="{{ path('app_contact') }}">Formulaire de Contact</a>
+        {% if is_granted("ROLE_USER") %}
+            <a class="nav-link {% if app.request.pathInfo == '/goldenbook'  %} active {% endif %}" href="{{ path('app_goldenbook') }}">Livre d'Or</a>
+        {% endif %}
+    </div>
     <hr class="my-2">
-
     <p>&copy; 2024 Mon site web. Tous droits réservés.</p>
 </footer>
 

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Livre d'Or{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1>Gestion du Livre d'Or</h1>
+            <div class="after-title mb-5"></div>
+            <article>
+                <div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores aut autem
+                        consequatur dolor dolore eius error est fugit incidunt itaque laudantium maxime
+                        molestias natus officia perferendis, quo soluta voluptatibus.</p></div>
+                <div class="GoldenBookCard ">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Texte</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">On/Off</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for AllGoldenBook in AllGoldenBooks %}
+                            <tr>
+                                <td>{{ AllGoldenBook.username }}</td>
+                                <td class="textGoldenBook">{{ AllGoldenBook.text}}</td>
+                                <td>{{ AllGoldenBook.date| date("m/d/Y") }}</td>
+                                {% if AllGoldenBook.active == false %}
+                                    <td class="RedGoldenBook"><a href="{{ path('app_onoffgoldenbook', {id: AllGoldenBook.id}) }}">OFF</a></td>
+                                {% elseif AllGoldenBook.active == true %}
+                                    <td class="GreenGoldenBook"><a href="{{ path('app_onoffgoldenbook', {id: AllGoldenBook.id}) }}">ON</a></td>
+                                {% endif %}
+                                <td class="DeleteGoldenBook"><a href="{{ path('app_delete_goldenbook', {id: AllGoldenBook.id}) }}">Supprimer</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </div>
+    </section>
+{% endblock %}

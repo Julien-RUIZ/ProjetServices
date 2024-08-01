@@ -7,31 +7,51 @@
     <div class="container">
         <h1 class="">Gestion des services, pourquoi et pour qui ?</h1>
         <div class="after-title"></div>
-        <div class="row justify-content-start">
-            <div class="mt-5 col-md-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Tristique senectus et netus et. Dignissim convallis aenean et tortor at risus viverra. Amet est placerat in egestas erat
-                imperdiet sed euismod nisi. Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Semper risus in hendrerit
-                gravida. In ornare quam viverra orci sagittis. Nec sagittis aliquam malesuada bibendum. Orci dapibus ultrices in iaculis nunc
-                sed augue lacus. Purus viverra accumsan in nisl nisi scelerisque. Sed euismod nisi porta lorem. Dolor magna eget est lorem ipsum.
-                Amet nisl suscipit adipiscing bibendum est. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Eget egestas purus viverra
-                accumsan. Bibendum arcu vitae elementum curabitur. Fames ac turpis egestas sed.
-            </div>
+        <article>
+            <div class="mb-5">
+                <div class="row justify-content-start">
+                    <div class="mt-5 col-md-8">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Tristique senectus et netus et. Dignissim convallis aenean et tortor at risus viverra. Amet est placerat in egestas erat
+                        imperdiet sed euismod nisi. Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Semper risus in hendrerit
+                        gravida. In ornare quam viverra orci sagittis. Nec sagittis aliquam malesuada bibendum. Orci dapibus ultrices in iaculis nunc
+                        sed augue lacus. Purus viverra accumsan in nisl nisi scelerisque. Sed euismod nisi porta lorem. Dolor magna eget est lorem ipsum.
+                        Amet nisl suscipit adipiscing bibendum est. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Eget egestas purus viverra
+                        accumsan. Bibendum arcu vitae elementum curabitur. Fames ac turpis egestas sed.
+                    </div>
+                </div>
 
-        </div>
-        <div class="row justify-content-end">
-            <div class="mt-3 col-md-8">
-                Congue eu consequat ac felis. Pretium fusce id velit ut tortor. Suscipit adipiscing bibendum est ultricies integer.
-                Enim nec dui nunc mattis. Id semper risus in hendrerit gravida. Nisi scelerisque eu ultrices vitae. Euismod in pellentesque
-                massa placerat duis ultricies lacus sed turpis. Non curabitur gravida arcu ac tortor dignissim convallis. Risus viverra adipiscing
-                at in tellus integer feugiat scelerisque varius. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Purus gravida quis
-                blandit turpis cursus in hac habitasse platea. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Quisque
-                id diam vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Ac tortor vitae
-                purus faucibus ornare suspendisse sed nisi lacus. Purus in massa tempor nec. Libero justo laoreet sit amet.
+                <div class="row justify-content-end">
+                    <div class="mt-3 col-md-8">
+                        Congue eu consequat ac felis. Pretium fusce id velit ut tortor. Suscipit adipiscing bibendum est ultricies integer.
+                        Enim nec dui nunc mattis. Id semper risus in hendrerit gravida. Nisi scelerisque eu ultrices vitae. Euismod in pellentesque
+                        massa placerat duis ultricies lacus sed turpis. Non curabitur gravida arcu ac tortor dignissim convallis. Risus viverra adipiscing
+                        at in tellus integer feugiat scelerisque varius. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Purus gravida quis
+                        blandit turpis cursus in hac habitasse platea. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius. Quisque
+                        id diam vel quam elementum pulvinar etiam non quam. Vulputate odio ut enim blandit volutpat maecenas volutpat. Ac tortor vitae
+                        purus faucibus ornare suspendisse sed nisi lacus. Purus in massa tempor nec. Libero justo laoreet sit amet.
+                    </div>
+                </div>
             </div>
+        </article>
 
-        </div>
+        <article>
+            <div>
+                <h2>Ce qu'ils pensent de nous</h2>
+                <div class="after-title"></div>
+                <div class="GoldenBookCard mt-5">
+                    {% for GoldenBook in GoldenBooks %}
+                        <div class="card mb-5" style="width: 18rem;">
+                            <div class="card-body">
+                                <p class="card-text">{{ GoldenBook.text}}</p>
+                                <p class="card-username"><i>{{ GoldenBook.username }}</i></p>
+                                <p class="card-date">{{ GoldenBook.date| date("m/d/Y") }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
     </div>
-
 </section>
 {% endblock %}

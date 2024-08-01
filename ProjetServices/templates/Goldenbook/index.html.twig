@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReadGoldenBookController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Livre d'Or</h1>
+        <div class="after-title"></div>
+        <div class=" my-5">
+            {{ form(form) }}
+        </div>
+        <h2>Ce qu'ils pensent de nous</h2>
+        <div class="after-title"></div>
+        <div class="GoldenBookCard mt-5">
+            {% for ActiveGoldenBook in ActiveGoldenBooks %}
+                    <div class="card mb-5" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-text">{{ ActiveGoldenBook.text}}</p>
+                            <p class="card-username"><i>{{ ActiveGoldenBook.username }}</i></p>
+                            <p class="card-date">{{ ActiveGoldenBook.date| date("m/d/Y") }}</p>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

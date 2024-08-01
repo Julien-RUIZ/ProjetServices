@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1>Administration du site</h1>
+            <div class="after-title mb-5"></div>
+            <div><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores aut autem
+                    consequatur dolor dolore eius error est fugit incidunt itaque laudantium maxime
+                    molestias natus officia perferendis, quo soluta voluptatibus.</p></div>
+            <div>
+                <a href="{{ path('app_admin_goldenbook') }}">Gestion des livres d'Or</a>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
