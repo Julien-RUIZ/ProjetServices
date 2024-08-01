@@ -11,3 +11,5 @@ En outre, ce projet inclut une page dédiée à l'erreur 404 et une autre pour l
 À la racine du projet, vous trouverez un fichier SQL contenant la structure de la base de données ainsi qu'un jeu de données initial.
 
 Suite à l'installation de Symfony et la configuration du fichier .env pour la base de données, vous pourrez créer des fixtures afin de générer un jeu de données. Cela vous permettra d'observer le fonctionnement de l'application. 
+
+MAJ 01/08/2024: Ajout d'un Livre d'or + fixture et une section Administration du site seulement pour l'utilisateur ROLE_ADMIN. 
