@@ -19,21 +19,33 @@ class ReadGoldenBookController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(GoldenBookRepository $goldenBookRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $GoldenBook = new GoldenBook();
-        $form = $this->createForm(GoldenBookType::class, $GoldenBook);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $GoldenBook->setDate(new \DateTimeImmutable());
-            $GoldenBook->setActive(false);
-            $entityManager->persist($GoldenBook);
-            $entityManager->flush();
-            $this->addFlash('success', 'Ajout du message dans le livre d\or validé' );
-            return $this->redirectToRoute('app_goldenbook');
-        }
-        $ActiveGoldenBooks = $goldenBookRepository->findGoldenBookActive();
 
-        return $this->render('Goldenbook/index.html.twig', [
-            'ActiveGoldenBooks' => $ActiveGoldenBooks, 'form'=>$form
-        ]);
+        if ($this->getUser()->getGoldenBook() === null){
+            $GoldenBook = new GoldenBook();
+            $form = $this->createForm(GoldenBookType::class, $GoldenBook);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $GoldenBook->setDate(new \DateTimeImmutable());
+                $GoldenBook->setActive(false);
+                $GoldenBook->setUser($this->getUser());
+                $entityManager->persist($GoldenBook);
+                $entityManager->flush();
+                $this->addFlash('success', 'Ajout du message dans le livre d\or validé' );
+                return $this->redirectToRoute('app_goldenbook');
+            }
+            $ActiveGoldenBooks = $goldenBookRepository->findGoldenBookActive();
+
+            return $this->render('Goldenbook/index.html.twig', [
+                'ActiveGoldenBooks' => $ActiveGoldenBooks, 'form'=>$form
+            ]);
+        }else{
+            $ActiveGoldenBooks = $goldenBookRepository->findGoldenBookActive();
+
+            return $this->render('Goldenbook/index.html.twig', [
+                'ActiveGoldenBooks' => $ActiveGoldenBooks
+            ]);
+        }
+
+
     }
 }

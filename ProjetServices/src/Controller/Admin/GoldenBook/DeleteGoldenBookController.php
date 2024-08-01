@@ -17,6 +17,7 @@ class DeleteGoldenBookController extends AbstractController
     {
         $entityManager->remove($goldenBook);
         $entityManager->flush();
+
         $this->addFlash('success', 'Suppression du message.' );
         return $this->redirectToRoute('app_admin_goldenbook');
     }

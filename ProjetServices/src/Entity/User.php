@@ -75,6 +75,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $notes;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
+    private ?GoldenBook $goldenBook = null;
+
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
@@ -289,6 +292,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $note->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getGoldenBook(): ?GoldenBook
+    {
+        return $this->goldenBook;
+    }
+
+    public function setGoldenBook(?GoldenBook $goldenBook): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($goldenBook === null && $this->goldenBook !== null) {
+            $this->goldenBook->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($goldenBook !== null && $goldenBook->getUser() !== $this) {
+            $goldenBook->setUser($this);
+        }
+
+        $this->goldenBook = $goldenBook;
+
         return $this;
     }
 
