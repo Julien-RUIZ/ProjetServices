@@ -27,12 +27,16 @@ class UserAddressUpdateController extends AbstractController
         $form= $this->createForm(UserAddressType::class, $userAddress);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            //Test s'il existe ou non un service Loyer
             $services = $serviceRepository->findservice($userAddress->getId());
             $this->LoyerTrueOrFalse($services);
-            if ($userAddress->isRental() === true && $this->Loyer === false){
+            if ($userAddress->isRental() === true && $this->Loyer === false && !empty($userAddress->getRentprice()) && !empty($userAddress->getRealEstateAgency())){
                 $addRentalService->addRental($userAddress->getRentprice(), $userAddress, $userAddress->getRealEstateAgency());
-            }elseif ($userAddress->isRental() === false && $this->Loyer === true){
+            }
+            if ($userAddress->isRental() === true && $this->Loyer === false && empty($userAddress->getRentprice()) || empty($userAddress->getRealEstateAgency())){
+                $this->addFlash('danger', "S'il y a location, merci d'indiquer le prix du loyer ainsi que l'agence immobilière." );
+                return $this->redirectToRoute('app_profile');
+            }
+            if ($userAddress->isRental() === false && $this->Loyer === true){
                 $em->remove($this->rentService);
             }
             $em->flush();

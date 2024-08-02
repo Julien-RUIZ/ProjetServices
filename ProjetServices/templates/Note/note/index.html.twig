@@ -39,6 +39,7 @@
                                         {{ form_start(form) }}
                                         {{ form_errors(form) }}
                                         {{ form_row(form.title) }}
+                                        {{ form_errors(form.title) }}
                                         {{ form_row(form.text) }}
                                         {{ form_row(form.reminder) }}
                                         {% if form.date.vars.value is defined %}

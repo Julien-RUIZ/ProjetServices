@@ -25,7 +25,7 @@ class GoldenBook
 
     #[Assert\Length(
         min: 5,
-        max: 50,
+        max: 100,
         minMessage: 'Votre texte ne peut être inférieur à {{ limit }} caractères',
         maxMessage: 'Votre texte ne peut être supérieur à {{ limit }} caractères',
     )]

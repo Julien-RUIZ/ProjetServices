@@ -22,11 +22,14 @@ class UserAddress
     #[ORM\Column(length: 50, nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $Address = null;
-
+    #[Assert\Type('string')]
     #[ORM\Column(length: 20, nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $city = null;
-
+    #[Assert\Type(
+        type: 'integer',
+        message: 'The value {{ value }} is not a valid {{ type }}.',
+    )]
     #[ORM\Column(length: 7, nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $postalCode = null;

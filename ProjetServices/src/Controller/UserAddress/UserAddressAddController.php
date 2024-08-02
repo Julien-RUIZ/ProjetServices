@@ -26,8 +26,12 @@ class UserAddressAddController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $user = $this->getUser();
             $address->setUser($user);
-            if ($address->isRental()){
+            if ($address->isRental() && !empty($address->getRentprice()) && !empty($address->getRealEstateAgency())){
                $addRentalService->addRental($address->getRentprice(), $address, $address->getRealEstateAgency());
+            }
+            if ($address->isRental() && empty($address->getRentprice()) || empty($address->getRealEstateAgency())){
+                $this->addFlash('danger', "S'il y a location, merci d'indiquer le prix du loyer ainsi que l'agence immobilière." );
+                return $this->redirectToRoute('app_useraddress_add');
             }
             $em->persist($address);
             $em->flush();

@@ -34,24 +34,25 @@
                 </div>
             </div>
         </article>
-
-        <article>
-            <div>
-                <h2>Ce qu'ils pensent de nous</h2>
-                <div class="after-title"></div>
-                <div class="GoldenBookCard mt-5">
-                    {% for GoldenBook in GoldenBooks %}
-                        <div class="card mb-5" style="width: 18rem;">
-                            <div class="card-body">
-                                <p class="card-text">{{ GoldenBook.text}}</p>
-                                <p class="card-username"><i>{{ GoldenBook.username }}</i></p>
-                                <p class="card-date">{{ GoldenBook.date| date("m/d/Y") }}</p>
+        {% if GoldenBooks != [] %}
+            <article>
+                <div>
+                    <h2>Ce qu'ils pensent de nous</h2>
+                    <div class="after-title"></div>
+                    <div class="GoldenBookCard mt-5">
+                        {% for GoldenBook in GoldenBooks %}
+                            <div class="card mb-5" style="width: 18rem;">
+                                <div class="card-body">
+                                    <p class="card-text">{{ GoldenBook.text}}</p>
+                                    <p class="card-username"><i>{{ GoldenBook.username }}</i></p>
+                                    <p class="card-date">{{ GoldenBook.date| date("m/d/Y") }}</p>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

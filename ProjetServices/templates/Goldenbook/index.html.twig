@@ -12,7 +12,7 @@
             </div>
         {% endif %}
         <article class="mt-5">
-            <h2>Ce qu'ils pensent de nous</h2>
+
             <div class="GoldenBookCard ">
                 {% for ActiveGoldenBook in ActiveGoldenBooks %}
                     <div {% if app.user == ActiveGoldenBook.user%}

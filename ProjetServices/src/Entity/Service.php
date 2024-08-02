@@ -16,7 +16,7 @@ class Service
     #[ORM\Column]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $id = null;
-
+    #[Assert\Type('string')]
     #[ORM\Column(length: 30)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $name = null;
@@ -24,11 +24,17 @@ class Service
     #[ORM\Column(length: 255)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $link = null;
-
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La valeur {{ value }} n\'est pas une valeur de type {{ type }}.',
+    )]
     #[ORM\Column(nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceMonth = null;
-
+    #[Assert\Type(
+        type: 'integer',
+        message: 'La valeur {{ value }} n\'est pas une valeur de type {{ type }}.',
+    )]
     #[ORM\Column(nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceYear = null;

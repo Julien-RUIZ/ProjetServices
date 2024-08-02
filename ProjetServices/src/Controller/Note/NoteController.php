@@ -37,6 +37,7 @@ class NoteController extends AbstractController
                     $note->setdatemodif($reminder->CurrentDate());
                     $entityManager->persist($note);
                     $entityManager->flush();
+                    $this->addFlash('success', "Message enregistré");
                     return $this->redirectToRoute('app_note');
                 }
             }else{

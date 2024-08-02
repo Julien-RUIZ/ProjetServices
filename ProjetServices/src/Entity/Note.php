@@ -15,13 +15,13 @@ class Note
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Type('string')]
     #[ORM\Column(length: 30)]
     #[ORM\JoinColumn(nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[ORM\JoinColumn(nullable: true)]
-
     private ?string $text = null;
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
@@ -31,6 +31,7 @@ class Note
     #[ORM\Column]
     private ?bool $reminder = false;
 
+    #[Assert\Date]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
