@@ -32,7 +32,7 @@ class NoteType extends AbstractType
             ])
             ->add('text', TextareaType::class, [
                 'label'=>'Texte',
-                'sanitize_html' => true,
+
             ])
             ->add('reminder', CheckboxType::class, [
                 'label'=>'Relance par mail',

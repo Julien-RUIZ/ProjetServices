@@ -22,6 +22,7 @@ class UserAddressRepository extends ServiceEntityRepository
         parent::__construct($registry, UserAddress::class);
     }
 
+
     public function findByUserId($userid): array
     {
         return $this->createQueryBuilder('u')

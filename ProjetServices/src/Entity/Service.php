@@ -45,6 +45,7 @@ class Service
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, cascade: ['persist'], inversedBy: 'service')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?UserAddress $userAddress = null;
 
 

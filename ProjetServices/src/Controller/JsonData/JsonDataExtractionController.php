@@ -21,14 +21,14 @@ class JsonDataExtractionController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(UserAddressRepository $userAddressRepository,
                           SerializerInterface $serializer,
-                          EntityManagerInterface $entityManager): RedirectResponse
+                          EntityManagerInterface $entityManager,
+                          ServiceRepository $serviceRepository): RedirectResponse
     {
         if($this->getUser()){
             $userid = $this->getUser()->getid();
-            $jasondata = $userAddressRepository->findBy(['user'=>$userid]);
-
+            $jasondata = $serviceRepository->UserAdressAndServiceByUserid($userid);
             $serializJson = $serializer->serialize($jasondata, 'json',[
-                AbstractNormalizer::GROUPS=>'jsondataextract',
+                'groups'=>'jsondataextract'
             ]);
 
             //put in file in data folder
