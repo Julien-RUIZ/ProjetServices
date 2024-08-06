@@ -15,9 +15,10 @@ class DeleteGoldenBookController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(GoldenBook $goldenBook, EntityManagerInterface $entityManager): Response
     {
-        $entityManager->remove($goldenBook);
-        $entityManager->flush();
-
+        if (isset($goldenBook)){
+            $entityManager->remove($goldenBook);
+            $entityManager->flush();
+        }
         $this->addFlash('success', 'Suppression du message.' );
         return $this->redirectToRoute('app_admin_goldenbook');
     }

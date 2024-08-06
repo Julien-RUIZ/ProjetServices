@@ -19,6 +19,7 @@ class GoldenBookRepository extends ServiceEntityRepository
     public function findGoldenBookActive(){
         return $this->createQueryBuilder('g')
             ->where('g.active = true')
+            ->setMaxResults(8)
             ->getQuery()
             ->getResult();
     }

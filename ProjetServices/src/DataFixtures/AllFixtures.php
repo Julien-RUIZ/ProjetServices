@@ -30,7 +30,7 @@ class AllFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for($i=0; $i<5; $i++){
+        for($i=0; $i<8; $i++){
             $goldenBook = new GoldenBook();
             $goldenBook->setUsername('person'.$i)
                 ->setText($this->lorem->CreateLorem())
