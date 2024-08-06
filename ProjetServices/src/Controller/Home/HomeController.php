@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(GoldenBookRepository $goldenBookRepository): Response
     {
 
