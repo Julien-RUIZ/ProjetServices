@@ -12,4 +12,5 @@ En outre, ce projet inclut une page dédiée à l'erreur 404 et une autre pour l
 
 Suite à l'installation de Symfony et la configuration du fichier .env pour la base de données, vous pourrez créer des fixtures afin de générer un jeu de données. Cela vous permettra d'observer le fonctionnement de l'application. 
 
-MAJ 01/08/2024: Ajout d'un Livre d'or + fixture et une section Administration du site seulement pour l'utilisateur ROLE_ADMIN. 
+MAJ 01/08/2024: Ajout d'un Livre d'or + fixture et une section Administration du site seulement pour l'utilisateur ROLE_ADMIN.
+MAJ 06/08/2024 : Extraction et intégration de données. Nous avons ciblé les adresses et les services pour extraire et intégrer les données. L'approche utilisée inclut le Serializer et le Deserializer de Symfony pour gérer ces opérations.
