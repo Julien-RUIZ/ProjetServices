@@ -16,6 +16,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * To use fixtures use the command: php bin/console doctrine:fixtures:load
+ * Mode test : php bin/console doctrine:fixtures:load --env=test
+ *
  * For the connection here is an example login:
  * Username : username0
  * Password : Username0%

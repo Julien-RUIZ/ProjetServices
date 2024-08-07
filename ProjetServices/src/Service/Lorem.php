@@ -16,7 +16,7 @@ class Lorem implements LoremInterface
             $keyOfWord = rand(1, count($tablorem)-1);
             $newText.= $tablorem[$keyOfWord].' ';
             if($i===($nbword-1)){
-                $newText.= $tablorem[$keyOfWord].'.';
+                $newText.='.';
             }
         }
         return $newText;
