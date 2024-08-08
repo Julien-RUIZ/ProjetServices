@@ -32,7 +32,6 @@ class GoldenBook
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[Assert\Date]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 

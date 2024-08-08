@@ -24,6 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
     #[Assert\Regex(
         pattern: '/^[a-z0-9_-]{6,15}$/',
         message: 'Please respect a minimum of 6 characters without spaces and with or without hyphens',
@@ -43,6 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/')]
     private ?string $email = null;
 
@@ -54,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $name = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^[a-zA-ZàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ -]+$/u')]
     private ?string $firstname = null;
 
