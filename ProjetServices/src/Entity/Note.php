@@ -15,11 +15,29 @@ class Note
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\Type('string')]
-    #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 5,
+        max: 30,
+        minMessage: 'Votre titre ne peut être inférieur à {{ limit }} caractères',
+        maxMessage: 'Votre titre ne peut être supérieur à {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: 'Please do not include any special characters',
+    )]
     #[ORM\JoinColumn(nullable: true)]
     private ?string $title = null;
 
+    #[Assert\Length(
+        min: 5,
+        max: 500,
+        minMessage: 'Votre texte ne peut être inférieur à {{ limit }} caractères',
+        maxMessage: 'Votre texte ne peut être supérieur à {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: 'Please do not include any special characters',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     #[ORM\JoinColumn(nullable: true)]
     private ?string $text = null;
@@ -35,6 +53,7 @@ class Note
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
+    #[Assert\Regex(pattern: '/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/')]
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $emailsend = null;
 

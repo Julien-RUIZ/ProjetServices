@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: GoldenBookRepository::class)]
 class GoldenBook
 {
+    public const GENRES = [true, false, null];
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,6 +21,10 @@ class GoldenBook
         minMessage: 'Votre nom ne peut être inférieur à {{ limit }} caractères',
         maxMessage: 'Votre nom ne peut être supérieur à {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: 'Please do not include any special characters',
+    )]
     #[ORM\Column(length: 15)]
     private ?string $username = null;
 
@@ -29,13 +34,19 @@ class GoldenBook
         minMessage: 'Votre texte ne peut être inférieur à {{ limit }} caractères',
         maxMessage: 'Votre texte ne peut être supérieur à {{ limit }} caractères',
     )]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: 'Please do not include any special characters',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Assert\Type('bool')]
+    #[Assert\Choice(choices: GoldenBook::GENRES)]
     private ?bool $active = null;
 
     #[ORM\OneToOne(inversedBy: 'goldenBook', cascade: ['persist'])]
@@ -87,8 +98,9 @@ class GoldenBook
         return $this->active;
     }
 
-    public function setActive(bool $active): static
+    public function setActive(?bool $active): static
     {
+
         $this->active = $active;
 
         return $this;

@@ -16,25 +16,31 @@ class Service
     #[ORM\Column]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $id = null;
+
     #[Assert\Type('string')]
+    #[Assert\Regex(pattern: '/^[a-zA-Z -]+$/', message: "Please only include alphabetic characters with or without lines and spaces")]
     #[ORM\Column(length: 30)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex(pattern: '/^[^<>]*$/')]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $link = null;
-    #[Assert\Type(
-        type: 'integer',
-        message: 'La valeur {{ value }} n\'est pas une valeur de type {{ type }}.',
+
+    #[Assert\Range(
+        min: 5,
+        max: 1000000,
     )]
     #[ORM\Column(nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceMonth = null;
-    #[Assert\Type(
-        type: 'integer',
-        message: 'La valeur {{ value }} n\'est pas une valeur de type {{ type }}.',
+
+    #[Assert\Range(
+        min: 5,
+        max: 1000000,
     )]
+    #[Assert\Regex(pattern: '/^\d+$/')]
     #[ORM\Column(nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $priceYear = null;
