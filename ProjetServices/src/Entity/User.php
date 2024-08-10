@@ -24,9 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '/^[a-z0-9_-]{6,15}$/',
+        pattern: '/^[a-zA-Z0-9_-]{6,15}$/',
         message: 'Please respect a minimum of 6 characters without spaces and with or without hyphens',
     )]
     private ?string $username = null;
@@ -41,10 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(pattern: '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])[\S]{8,}$/', message: 'Must contain at least 1 uppercase letter, 1 lowercase letter and 1 number.
+                                      May contain special characters. Minimum 8 characters')]
+
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
-    #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^([A-Z|a-z|0-9](\.|_){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/')]
     private ?string $email = null;
 
@@ -56,7 +57,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $name = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^[a-zA-ZàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ -]+$/u')]
     private ?string $firstname = null;
 

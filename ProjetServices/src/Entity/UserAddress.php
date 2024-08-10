@@ -24,6 +24,8 @@ class UserAddress
     private ?string $Address = null;
     #[Assert\Type('string')]
     #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Regex(pattern: '/^[a-zA-Z -]+$/', message: "Please only include alphabetic characters with or without lines and spaces")]
+
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $city = null;
     #[Assert\Type(
@@ -44,6 +46,7 @@ class UserAddress
 
     #[ORM\Column(length: 255)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
+    #[Assert\Regex(pattern: '/^[a-zA-Z -]+$/', message: "Please only include alphabetic characters with or without lines and spaces")]
     private ?string $dwellingType = null;
 
     #[ORM\Column]
@@ -69,9 +72,18 @@ class UserAddress
     private ?string $additional = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Range(
+        min: 5,
+        max: 1000000,
+    )]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?int $rentprice = null;
-
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'Votre texte ne peut être inférieur à {{ limit }} caractères',
+        maxMessage: 'Votre texte ne peut être supérieur à {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['jsondataextract', 'jsondataInteg'])]
     private ?string $RealEstateAgency = null;

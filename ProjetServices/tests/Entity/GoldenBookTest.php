@@ -19,7 +19,7 @@ class GoldenBookTest extends KernelTestCase
             ->setText('Juste un mot en test')
             ->setUser(NULL);
     }
-    private function NbErrors($goldenBook, $nberrors = 0){
+    private function NbErrors(GoldenBook $goldenBook, $nberrors = 0){
         self::bootKernel();
         $errors = self::getContainer()->get('validator')->validate($goldenBook);
         $this->assertCount($nberrors, $errors);

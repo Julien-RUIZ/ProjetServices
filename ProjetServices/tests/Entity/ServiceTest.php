@@ -13,7 +13,7 @@ class ServiceTest extends KernelTestCase
     {
       $this->Service = new Service();
     }
-    public function TestService($service, $nberror){
+    public function TestService(Service $service, $nberror){
       self::bootKernel();
       $errors = self::getContainer()->get('validator')->validate($service);
       $this->assertCount($nberror, $errors);
