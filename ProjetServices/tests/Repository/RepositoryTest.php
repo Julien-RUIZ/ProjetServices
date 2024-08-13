@@ -18,7 +18,6 @@ class RepositoryTest extends KernelTestCase
         $nbusers = self::getContainer()->get($repo)->count([]);
         $this->assertEquals($nbElements, $nbusers, $message);
     }
-
     public function dataRepository(){
         return [
             [UserRepository::class, 5, "Erreur sur User"],
@@ -28,5 +27,4 @@ class RepositoryTest extends KernelTestCase
 
         ];
     }
-
 }
