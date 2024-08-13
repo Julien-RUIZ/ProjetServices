@@ -67,7 +67,6 @@ class AllFixtures extends Fixture
 
         $user = $this->userRepository->findAll();
         for ($i=0; $i<5; $i++){
-
             $userAddress = new UserAddress();
             if ($i === 0){
                 $userAddress->setMainAddress(True);

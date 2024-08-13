@@ -25,6 +25,7 @@ class Note
         pattern: "/^[a-zA-Z0-9\s]*$/",
         message: 'Please do not include any special characters',
     )]
+    #[ORM\Column(type: Types::TEXT)]
     #[ORM\JoinColumn(nullable: true)]
     private ?string $title = null;
 

@@ -53,10 +53,12 @@
                                         <div class="col-3 tableServices">Lien : {{ service.link}}</div>
                                         <div class="col-2 tableServices text-center">{{ service.priceYear }} €/an - {{ service.priceMonth }} €/mois</div>
                                         <div class="col-1 tableServices modifService text-center">
-                                                <a class="modifier" href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a>
+                                            <a class="modifier d-none d-xl-inline" href="{{ path('app_update_service', {id: service.id}) }}">Modifier</a>
+                                            <a class="modifier d-inline d-xl-none" href="{{ path('app_update_service', {id: service.id}) }}">Modif</a>
                                         </div>
                                         <div class="col-1 tableServices supprService text-center">
-                                                <a class="supprimer" href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a>
+                                            <a class="supprimer d-none d-xl-inline" href="{{ path('app_delete_service', {id: service.id}) }}">Supprimer</a>
+                                            <a class="supprimer d-inline d-xl-none" href="{{ path('app_delete_service', {id: service.id}) }}">Suppr</a>
                                         </div>
                                     </div>
                                 {% endfor %}

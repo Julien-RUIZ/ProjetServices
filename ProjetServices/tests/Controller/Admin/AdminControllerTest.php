@@ -27,7 +27,6 @@ class AdminControllerTest extends WebTestCase
         $client= static::createClient();
         $userRepository = self::getContainer()->get(UserRepository::class);
         $user  = $userRepository->findOneBy(['username' => 'username0']);
-        //dd($user);
         $client->loginUser($user);
         $client->request('GET', '/Admin');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK); // 200 OK : Indique que la page a été trouvée et affichée correctement.

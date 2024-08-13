@@ -80,8 +80,11 @@
                             </aside>
                         </div>
                     </div>
-                    <div><a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">+</a></div>
-                    <div><a href="#Notes" class="btn btn-outline-dark mb-5">Retour sur haut de page</a></div>
+                    <div class="d-flex justify-content-center">
+                        <div><a href="{{ path('app_add_note') }}" class="btn btn-outline-dark mb-5">Ajouter une note</a></div>
+                        <div><a href="#Notes" class="btn btn-outline-dark mb-5">Retour sur haut de page</a></div>
+                    </div>
+
                 {% endif %}
         </div>
     </section>
