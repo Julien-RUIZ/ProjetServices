@@ -42,7 +42,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Assert\Regex(pattern: '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])[\S]{8,}$/', message: 'Must contain at least 1 uppercase letter, 1 lowercase letter and 1 number.
                                       May contain special characters. Minimum 8 characters')]
-
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
